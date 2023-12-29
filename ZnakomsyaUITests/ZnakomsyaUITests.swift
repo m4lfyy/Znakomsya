@@ -1,10 +1,3 @@
-//
-//  ZnakomsyaUITests.swift
-//  ZnakomsyaUITests
-//
-//  Created by Павел Панчук on 29.12.2023.
-//
-
 import XCTest
 
 final class ZnakomsyaUITests: XCTestCase {

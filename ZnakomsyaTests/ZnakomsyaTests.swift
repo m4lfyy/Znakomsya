@@ -1,10 +1,3 @@
-//
-//  ZnakomsyaTests.swift
-//  ZnakomsyaTests
-//
-//  Created by Павел Панчук on 29.12.2023.
-//
-
 import XCTest
 @testable import Znakomsya
 
