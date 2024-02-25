@@ -1,8 +1,5 @@
-//
-//  ModelData.swift
-//  Znakomsya
-//
-//  Created by Павел Панчук on 20.02.2024.
-//
+import SwiftUI
 
-import Foundation
+class ModelData: ObservableObject {
+    @Published var registrationData: RegistrationData = RegistrationData()
+}

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @State private var isRegistrationPresented = false
+    
     var body: some View {
         VStack {
             Spacer()
@@ -18,7 +20,9 @@ struct WelcomeView: View {
                 .multilineTextAlignment(.center)
                 .padding()
 
-            NavigationLink(destination: RegistrationView()) {
+            Button(action: {
+                isRegistrationPresented.toggle()
+            }) {
                 Text("Регистрация")
                     .padding()
                     .foregroundColor(.white)
@@ -26,7 +30,10 @@ struct WelcomeView: View {
                     .cornerRadius(10)
             }
             .padding()
-
+            .fullScreenCover(isPresented: $isRegistrationPresented) {
+                RegistrationView().environmentObject(ModelData())
+            }
+            
             Spacer()
         }
         .padding()
@@ -36,4 +43,5 @@ struct WelcomeView: View {
 #Preview {
     WelcomeView()
 }
+
 
