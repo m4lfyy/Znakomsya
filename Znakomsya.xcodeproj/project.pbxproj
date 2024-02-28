@@ -10,7 +10,6 @@
 		3713D4CE2B8A843E00E4DD0E /* Wel in Resources */ = {isa = PBXBuildFile; fileRef = 3713D4CD2B8A843E00E4DD0E /* Wel */; };
 		3713D4D02B8A895A00E4DD0E /* Reg in Resources */ = {isa = PBXBuildFile; fileRef = 3713D4CF2B8A895A00E4DD0E /* Reg */; };
 		373C12312B866BC60006A74C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373C12302B866BC60006A74C /* ImagePicker.swift */; };
-		3754CAF52B8BD1AA007C0D7B /* PhoneNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754CAF42B8BD1AA007C0D7B /* PhoneNumberTextField.swift */; };
 		3791372E2B8BB6BD0042ADFA /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791372D2B8BB6BD0042ADFA /* Cities.swift */; };
 		379475332B81440600CC6A91 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379475322B81440600CC6A91 /* RegistrationView.swift */; };
 		379475352B814AB500CC6A91 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379475342B814AB500CC6A91 /* WelcomeView.swift */; };
@@ -46,7 +45,6 @@
 		3713D4CD2B8A843E00E4DD0E /* Wel */ = {isa = PBXFileReference; lastKnownFileType = text; path = Wel; sourceTree = "<group>"; };
 		3713D4CF2B8A895A00E4DD0E /* Reg */ = {isa = PBXFileReference; lastKnownFileType = text; path = Reg; sourceTree = "<group>"; };
 		373C12302B866BC60006A74C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		3754CAF42B8BD1AA007C0D7B /* PhoneNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTextField.swift; sourceTree = "<group>"; };
 		3791372D2B8BB6BD0042ADFA /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
 		379475322B81440600CC6A91 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		379475342B814AB500CC6A91 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				37B295902B3F620100F876DE /* ZnakomsyaApp.swift */,
-				3754CAF42B8BD1AA007C0D7B /* PhoneNumberTextField.swift */,
 				3791372F2B8BB8080042ADFA /* Data */,
 				37A9BDBB2B83E21700660D04 /* Views */,
 				37A9BDBA2B83E1E800660D04 /* Models */,
@@ -312,7 +309,6 @@
 			files = (
 				3791372E2B8BB6BD0042ADFA /* Cities.swift in Sources */,
 				379475332B81440600CC6A91 /* RegistrationView.swift in Sources */,
-				3754CAF52B8BD1AA007C0D7B /* PhoneNumberTextField.swift in Sources */,
 				37B295932B3F620100F876DE /* ContentView.swift in Sources */,
 				37B295912B3F620100F876DE /* ZnakomsyaApp.swift in Sources */,
 				373C12312B866BC60006A74C /* ImagePicker.swift in Sources */,

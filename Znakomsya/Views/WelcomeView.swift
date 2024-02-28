@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State private var isRegistrationPresented = false
+    @EnvironmentObject var modelData: ModelData
     
     var body: some View {
         VStack {
@@ -14,24 +15,43 @@ struct WelcomeView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding()
-            Text("Начните свое путешествие по знакомствам прямо сейчас.")
-                .font(.body)
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
+
+            TextField("Номер телефона", text: $modelData.registrationData.username)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .keyboardType(.phonePad)
+
+            SecureField("Пароль", text: $modelData.registrationData.password)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            HStack {
+                Button(action: {
+                    // Добавьте код для обработки входа
+                }) {
+                    Text("Войти")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.green)
+                        .cornerRadius(10)
+                }
                 .padding()
 
-            Button(action: {
-                isRegistrationPresented.toggle()
-            }) {
-                Text("Регистрация")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            .padding()
-            .fullScreenCover(isPresented: $isRegistrationPresented) {
-                RegistrationView().environmentObject(ModelData())
+                Button(action: {
+                    isRegistrationPresented.toggle()
+                }) {
+                    Text("Регистрация")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                .padding()
+                .fullScreenCover(isPresented: $isRegistrationPresented) {
+                    RegistrationView().environmentObject(ModelData())
+                }
             }
             
             Spacer()
@@ -42,6 +62,6 @@ struct WelcomeView: View {
 
 #Preview {
     WelcomeView()
+        .environmentObject(ModelData())
 }
-
 

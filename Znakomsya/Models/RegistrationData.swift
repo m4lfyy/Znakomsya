@@ -5,7 +5,8 @@ struct RegistrationData {
     var birthDate: Date = Date()
     var gender: String = "М"
     var city: String = "Москва"
-    var phoneNumber: String = ""
+    var username: String = ""
     var photo: Image?
+    var password: String = ""
 }
 

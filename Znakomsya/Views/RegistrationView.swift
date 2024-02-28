@@ -16,7 +16,7 @@ struct RegistrationView: View {
             // Обработать случай недопустимого номера телефона
             print("Invalid phone number")
         } else {
-            modelData.registrationData.phoneNumber = phoneNumber
+            modelData.registrationData.username = phoneNumber
         }
     }
 
@@ -137,6 +137,3 @@ struct RegistrationView: View {
     RegistrationView()
         .environmentObject(ModelData())
 }
-
-
-
