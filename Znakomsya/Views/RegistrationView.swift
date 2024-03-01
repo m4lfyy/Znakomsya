@@ -6,26 +6,33 @@ struct RegistrationView: View {
     @State private var isRegistrationCancelled = false
     @Environment(\.presentationMode) private var presentationMode
     
-    @State private var selectedCity = ""
     @State private var phoneNumber = ""
+    @State private var showErrorAlert = false
+    @State private var errorMessage = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
     
     let cities = Cities.all
     
-    private func handlePhoneNumber() {
-        if !isValidNumber(phoneNumber) {
-            // Обработать случай недопустимого номера телефона
-            print("Invalid phone number")
-        } else {
-            modelData.registrationData.username = phoneNumber
-        }
-    }
-
     private func isValidNumber(_ phoneNumber: String) -> Bool {
         let phoneRegex = "^\\+7\\d{10}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
         return predicate.evaluate(with: phoneNumber)
     }
     
+    private func isValidAge(_ birthDate: Date) -> Bool {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        if let age = calendar.dateComponents([.year], from: birthDate, to: currentDate).year {
+            return age >= 16
+        }
+        return false
+    }
+    
+    private func isValidPassword() -> Bool {
+        return password == confirmPassword && !password.isEmpty
+    }
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -54,26 +61,24 @@ struct RegistrationView: View {
                     Form {
                         Section {
                             TextField("Имя", text: $modelData.registrationData.name)
+                                .autocapitalization(.words)
                             DatePicker("Дата рождения", selection: $modelData.registrationData.birthDate, in: ...Date(), displayedComponents: .date)
                             Picker("Пол", selection: $modelData.registrationData.gender) {
                                 Text("Мужской").tag("М")
                                 Text("Женский").tag("Ж")
                             }
-                            Picker("Город", selection: $selectedCity) {
+                            Picker("Город", selection: $modelData.registrationData.city) {
                                 ForEach(cities, id: \.self) { city in
                                     Text(city)
                                 }
                             }
-                            .onChange(of: selectedCity) { newValue in
-                                modelData.registrationData.city = newValue
-                            }
                             TextField("Номер телефона", text: $phoneNumber)
                                 .keyboardType(.phonePad)
-                                .onAppear {
-                                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification, object: nil, queue: .main) { _ in
-                                        handlePhoneNumber()
-                                    }
-                                }
+                        }
+                        
+                        Section {
+                            SecureField("Пароль", text: $password)
+                            SecureField("Подтвердите пароль", text: $confirmPassword)
                         }
                         
                         Section {
@@ -103,10 +108,44 @@ struct RegistrationView: View {
                         
                         Section {
                             Button("Сохранить") {
+                                guard isValidAge(modelData.registrationData.birthDate) else {
+                                    showErrorAlert = true
+                                    errorMessage = "Пользователь должен быть не младше 14 лет"
+                                    return
+                                }
+                                
+                                guard isValidNumber(phoneNumber) else {
+                                    showErrorAlert = true
+                                    errorMessage = "Неверный номер телефона"
+                                    return
+                                }
+                                
+                                modelData.registrationData.username = phoneNumber
+                                
+                                guard isValidPassword() else {
+                                    showErrorAlert = true
+                                    errorMessage = "Пароли не совпадают"
+                                    return
+                                }
+                                
+                                modelData.registrationData.password = password
+                                
+                                guard !modelData.registrationData.name.isEmpty,
+                                      !modelData.registrationData.username.isEmpty,
+                                      !modelData.registrationData.password.isEmpty,
+                                      modelData.registrationData.photo != nil
+                                else {
+                                    showErrorAlert = true
+                                    errorMessage = "Все поля должны быть заполнены"
+                                    return
+                                }
+                                
                                 print("Данные: \(modelData.registrationData)")
                                 // Добавить здесь логику для сохранения данных
                             }
-                            .disabled(!isValidNumber(phoneNumber))
+                        }
+                        .alert(isPresented: $showErrorAlert) {
+                            Alert(title: Text("Ошибка"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
                         }
                     }
                     .sheet(isPresented: $isImagePickerPresented) {
