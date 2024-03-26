@@ -2,175 +2,87 @@ import SwiftUI
 
 struct RegistrationView: View {
     @EnvironmentObject var modelData: ModelData
-    @State private var isImagePickerPresented = false
-    @State private var isRegistrationCancelled = false
-    @Environment(\.presentationMode) private var presentationMode
-    
-    @State private var phoneNumber = ""
-    @State private var showErrorAlert = false
-    @State private var errorMessage = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    
-    let cities = Cities.all
-    
-    private func isValidNumber(_ phoneNumber: String) -> Bool {
-        let phoneRegex = "^\\+7\\d{10}$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-        return predicate.evaluate(with: phoneNumber)
+    init() {
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color(red: 1, green: 0.89, blue: 0.89).opacity(0.60))
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color(red: 0.22, green: 0.23, blue: 0.25))], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color(red: 0.28, green: 0.28, blue: 0.29).opacity(0.70))], for: .normal)
     }
     
-    private func isValidAge(_ birthDate: Date) -> Bool {
-        let currentDate = Date()
-        let calendar = Calendar.current
-        if let age = calendar.dateComponents([.year], from: birthDate, to: currentDate).year {
-            return age >= 16
-        }
-        return false
-    }
-    
-    private func isValidPassword() -> Bool {
-        return password == confirmPassword && !password.isEmpty
-    }
-
     var body: some View {
-        NavigationView {
-            ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: [.blue, .purple]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .edgesIgnoringSafeArea(.all)
+        ZStack {
+            Group {
+                Image("bg_img")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                // Окно ввода
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 340, height: 505)
+                    .background(Color(red: 1, green: 0.90, blue: 0.90).opacity(0.35))
+                    .cornerRadius(30)
+                    .offset(x: 0.50, y: 30.50)
+                // Кнопка регистрации
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 280, height: 49)
+                    .background(Color(red: 1, green: 0.89, blue: 0.89).opacity(0.60))
+                    .cornerRadius(15)
+                    .offset(x: 0.50, y: 223.50)
+                // Заголовок
+                Text("Регистрация")
+                    .frame(width: 180, height: 43)
+                    .offset(y:-285)
+                    .font(Font.custom("Montserrat-Medium", size: 26))
+                    .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
+            }
+            VStack {
+                // Имя
+                ZStack(alignment: .leading) {
+                    Image("name_img")
+                        .offset(x: -15, y: -175)
+                    // Затычка на placeholder (заработало без нее)
+                    /*if modelData.registrationData.name.isEmpty {
+                        Text("Имя")
+                            .foregroundColor(Color(red: 0.28, green: 0.28, blue: 0.29).opacity(0.70))
+                            .font(Font.custom("Montserrat-Meduim", size: 18))
+                            .frame(height: 50)
+                            .offset(x: 20, y: -174.50)
+                    }*/
+                    TextField("Введите имя", text: $modelData.registrationData.name)
+                        .font(Font.custom("Montserrat-Meduim", size: 18))
+                        .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
+                        .frame(width: 230, height: 50)
+                        .offset(x: 20, y: -175)
+
+                    // Пол
+                    Image("male_img")
+                        .offset(x: -15, y: -114.50)
+                        .opacity(0.6)
+                    
+                        Picker("", selection: $modelData.registrationData.gender) {
+                            Text("Мужской").tag("М")
+                            Text("Женский").tag("Ж")
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .frame(width: 200)
+                        .offset(x:13, y: -114.50)
+                    
+                    Image("female_img")
+                        .offset(x: 218, y: -114.50)
+                        .opacity(0.6)
+                }
+
+                Divider()
+                    .frame(width: 280)
+                    .background(Color.black)
+                    .opacity(0.6)
+                    .offset(y: -180)
                 
-                VStack {
-                    Spacer()
-                    
-                    Text("Регистрация")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .navigationBarItems(leading: Button(action: {
-                            isRegistrationCancelled = true
-                        }) {
-                            Image(systemName: "arrow.left.circle.fill")
-                                .font(.title)
-                                .foregroundColor(.white)
-                        })
-                    
-                    Form {
-                        Section {
-                            TextField("Имя", text: $modelData.registrationData.name)
-                                .autocapitalization(.words)
-                            DatePicker("Дата рождения", selection: $modelData.registrationData.birthDate, in: ...Date(), displayedComponents: .date)
-                            Picker("Пол", selection: $modelData.registrationData.gender) {
-                                Text("Мужской").tag("М")
-                                Text("Женский").tag("Ж")
-                            }
-                            Picker("Город", selection: $modelData.registrationData.city) {
-                                ForEach(cities, id: \.self) { city in
-                                    Text(city)
-                                }
-                            }
-                            TextField("Номер телефона", text: $phoneNumber)
-                                .keyboardType(.phonePad)
-                        }
-                        
-                        Section {
-                            SecureField("Пароль", text: $password)
-                            SecureField("Подтвердите пароль", text: $confirmPassword)
-                        }
-                        
-                        Section {
-                            HStack {
-                                Text("Фото")
-                                    .font(.headline)
-                                    .padding(.vertical, 5)
-                                Spacer()
-                                if let photo = modelData.registrationData.photo {
-                                    photo
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 50, height: 50)
-                                        .clipShape(Circle())
-                                } else {
-                                    Image(systemName: "camera")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 30, height: 30)
-                                        .foregroundColor(.blue)
-                                }
-                            }
-                            .onTapGesture {
-                                isImagePickerPresented.toggle()
-                            }
-                        }
-                        
-                        Section {
-                            Button("Сохранить") {
-                                guard isValidAge(modelData.registrationData.birthDate) else {
-                                    showErrorAlert = true
-                                    errorMessage = "Пользователь должен быть не младше 14 лет"
-                                    return
-                                }
-                                
-                                guard isValidNumber(phoneNumber) else {
-                                    showErrorAlert = true
-                                    errorMessage = "Неверный номер телефона"
-                                    return
-                                }
-                                
-                                modelData.registrationData.username = phoneNumber
-                                
-                                guard isValidPassword() else {
-                                    showErrorAlert = true
-                                    errorMessage = "Пароли не совпадают"
-                                    return
-                                }
-                                
-                                modelData.registrationData.password = password
-                                
-                                guard !modelData.registrationData.name.isEmpty,
-                                      !modelData.registrationData.username.isEmpty,
-                                      !modelData.registrationData.password.isEmpty,
-                                      modelData.registrationData.photo != nil
-                                else {
-                                    showErrorAlert = true
-                                    errorMessage = "Все поля должны быть заполнены"
-                                    return
-                                }
-                                
-                                print("Данные: \(modelData.registrationData)")
-                                // Добавить здесь логику для сохранения данных
-                            }
-                        }
-                        .alert(isPresented: $showErrorAlert) {
-                            Alert(title: Text("Ошибка"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-                        }
-                    }
-                    .sheet(isPresented: $isImagePickerPresented) {
-                        ImagePicker(image: $modelData.registrationData.photo)
-                    }
-                    
-                    Spacer()
-                }
-                .alert(isPresented: $isRegistrationCancelled) {
-                    Alert(
-                        title: Text("Отменить регистрацию?"),
-                        primaryButton: .default(Text("Да")) {
-                            // Сброс данных перед возвращением к WelcomeView
-                            modelData.registrationData = RegistrationData()
-                            // Возвращение к WelcomeView
-                            presentationMode.wrappedValue.dismiss()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
+
 
 #Preview {
     RegistrationView()
