@@ -8,45 +8,58 @@ struct RegistrationData {
     var phone: String = ""
     var password: String = ""
     
-    func validationError() -> String? {
-        if !isValidAge() {
-            return "Пользователь должен быть не младше 16 лет"
+    // Функция для проверки всех введенных данных
+    func validationError(check: String) -> String? {
+        switch true {
+        case name.isEmpty:
+            return "Введите имя"
+        case !validateBirthDate():
+            return "Вы должны быть старше 16 лет для регистрации"
+        case email.isEmpty:
+            return "Введите адрес электронной почты"
+        case !validateEmail():
+            return "Введите корректный адрес электронной почты"
+        case phone.isEmpty:
+            return "Введите номер телефона"
+        case !validatePhoneNumber():
+            return "Введите корректный номер телефона"
+        case password.isEmpty:
+            return "Введите пароль"
+        case check.isEmpty:
+            return "Введите подтверждение пароля"
+        case !validatePasswordMatch(check: check):
+            return "Пароли не совпадают"
+        default:
+            return nil // Если все поля валидны, возвращаем nil
         }
-
-        if !isValidPhoneNumber() {
-            return "Неверный номер телефона"
-        }
-
-        if !isValidEmail() {
-            return "Неверный адрес электронной почты"
-        }
-
-        if name.isEmpty {
-            return "Имя пользователя должно быть заполнено"
-        }
-
-        return nil
     }
-
-    private func isValidAge() -> Bool {
-        let currentDate = Date()
+    
+    // Функция для валидации даты
+    private func validateBirthDate() -> Bool {
         let calendar = Calendar.current
-        if let age = calendar.dateComponents([.year], from: birthDate, to: currentDate).year {
-            return age >= 16
-        }
-        return false
+        let currentDate = Date()
+        let minBirthDate = calendar.date(byAdding: .year, value: -16, to: currentDate)!
+        
+        return birthDate <= minBirthDate
     }
-
-    private func isValidPhoneNumber() -> Bool {
-        let phoneRegex = "^\\+7\\d{10}$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-        return predicate.evaluate(with: phone)
-    }
-
-    private func isValidEmail() -> Bool {
+    
+    // Функция для валидации почты
+    private func validateEmail() -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return predicate.evaluate(with: email)
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    // Функция для валидации номера телефона
+    private func validatePhoneNumber() -> Bool {
+        let phoneRegex = "^\\+7[0-9]{10}$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        return phonePredicate.evaluate(with: phone)
+    }
+    
+    // Функция для проверки совпадения паролей
+    private func validatePasswordMatch(check: String) -> Bool {
+        return password == check
     }
 }
 

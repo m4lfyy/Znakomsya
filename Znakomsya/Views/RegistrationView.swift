@@ -2,6 +2,10 @@ import SwiftUI
 
 struct RegistrationView: View {
     @EnvironmentObject var modelData: ModelData
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    @State private var confirmPassword = ""
+    
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color(red: 1, green: 0.89, blue: 0.89).opacity(0.60))
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(Color(red: 0.22, green: 0.23, blue: 0.25))], for: .selected)
@@ -100,6 +104,7 @@ struct RegistrationView: View {
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                     .frame(width: 230)
+                                    .autocapitalization(.none)
                             }
                             Rectangle ()
                                 .frame(width: 280, height: 1)
@@ -149,7 +154,7 @@ struct RegistrationView: View {
                         VStack (alignment: .leading){
                             HStack (spacing: 10) {
                                 Image("pass_img")
-                            SecureField("Подтвердите пароль", text: $modelData.registrationData.password)
+                            SecureField("Подтвердите пароль", text: $confirmPassword)
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                     .frame(width: 230)
@@ -164,7 +169,12 @@ struct RegistrationView: View {
                         
                         // Стек для кнопки
                         Button(action: {
-                            print(modelData.registrationData.name, modelData.registrationData.gender, modelData.registrationData.birthDate, modelData.registrationData.email, modelData.registrationData.phone, modelData.registrationData.password)
+                            if let errorMessage = modelData.registrationData.validationError(check: confirmPassword) {
+                                    showAlert = true
+                                    alertMessage = errorMessage
+                            } else {
+                                // back
+                            }
                         }
                         ) {
                             Text("Регистрация")
@@ -176,6 +186,9 @@ struct RegistrationView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
                         .padding(.top, 10)
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("Ошибка"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                        }
                     }
                     .padding(.horizontal)
                 }

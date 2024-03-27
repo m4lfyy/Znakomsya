@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3791372E2B8BB6BD0042ADFA /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791372D2B8BB6BD0042ADFA /* Cities.swift */; };
 		37A9BDB72B83A28200660D04 /* RegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9BDB62B83A28200660D04 /* RegistrationData.swift */; };
 		37A9BDC12B83FBE100660D04 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9BDC02B83FBE100660D04 /* ModelData.swift */; };
 		37B295912B3F620100F876DE /* ZnakomsyaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B295902B3F620100F876DE /* ZnakomsyaApp.swift */; };
@@ -56,7 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3791372D2B8BB6BD0042ADFA /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
 		37A9BDB62B83A28200660D04 /* RegistrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationData.swift; sourceTree = "<group>"; };
 		37A9BDC02B83FBE100660D04 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		37B2958D2B3F620100F876DE /* Znakomsya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Znakomsya.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,14 +114,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3791372F2B8BB8080042ADFA /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				3791372D2B8BB6BD0042ADFA /* Cities.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		37A9BDBA2B83E1E800660D04 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +158,6 @@
 				6100B96A2BAB29CA00FBCE5D /* Info.plist */,
 				6100B9692BAB29AC00FBCE5D /* Fonts */,
 				37B295902B3F620100F876DE /* ZnakomsyaApp.swift */,
-				3791372F2B8BB8080042ADFA /* Data */,
 				37A9BDBB2B83E21700660D04 /* Views */,
 				37A9BDBA2B83E1E800660D04 /* Models */,
 				37B295942B3F620200F876DE /* Assets.xcassets */,
@@ -375,7 +364,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3791372E2B8BB6BD0042ADFA /* Cities.swift in Sources */,
 				37B295932B3F620100F876DE /* ContentView.swift in Sources */,
 				37B295912B3F620100F876DE /* ZnakomsyaApp.swift in Sources */,
 				37A9BDB72B83A28200660D04 /* RegistrationData.swift in Sources */,
