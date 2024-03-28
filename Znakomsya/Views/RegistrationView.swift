@@ -16,7 +16,7 @@ struct RegistrationView: View {
         ZStack {
             Image("bg_img")
                 .resizable()
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .edgesIgnoringSafeArea(.all)
                 .scaledToFill()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             
@@ -39,7 +39,7 @@ struct RegistrationView: View {
                         VStack (alignment: .leading){
                             HStack (spacing: 10) {
                                 Image("name_img")
-                                TextField("Введите имя", text: $modelData.registrationData.name)
+                                TextField("Имя", text: $modelData.registrationData.name)
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                     .frame(width: 230)
@@ -100,7 +100,7 @@ struct RegistrationView: View {
                             HStack (spacing: 10) {
                                 Image("mail_img")
                                     .opacity(0.6)
-                                TextField("Введите Почту", text: $modelData.registrationData.email)
+                                TextField("Почта", text: $modelData.registrationData.email)
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                     .frame(width: 230)
@@ -173,7 +173,16 @@ struct RegistrationView: View {
                                     showAlert = true
                                     alertMessage = errorMessage
                             } else {
-                                // back
+                                modelData.registerUser { result in
+                                    switch result {
+                                        case .success(let token):
+                                            TokenManager.shared.saveToken(token)
+                                            // Добавьте действия после успешной регистрации
+                                        case .failure(let error):
+                                            print("Ошибка регистрации: \(error)")
+                                            // Обработка ошибки регистрации
+                                    }
+                                }
                             }
                         }
                         ) {

@@ -16,6 +16,8 @@
 		37B295A22B3F620200F876DE /* ZnakomsyaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B295A12B3F620200F876DE /* ZnakomsyaTests.swift */; };
 		37B295AC2B3F620200F876DE /* ZnakomsyaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B295AB2B3F620200F876DE /* ZnakomsyaUITests.swift */; };
 		37B295AE2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B295AD2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift */; };
+		37B30CBF2BB60C9F000C0F75 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 37B30CBE2BB60C9F000C0F75 /* KeychainSwift */; };
+		37B30CC12BB60CC1000C0F75 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B30CC02BB60CC1000C0F75 /* TokenManager.swift */; };
 		6100B9572BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9452BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf */; };
 		6100B9582BAB294E00FBCE5D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9462BAB294E00FBCE5D /* Montserrat-Bold.ttf */; };
 		6100B9592BAB294E00FBCE5D /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9472BAB294E00FBCE5D /* Montserrat-Italic.ttf */; };
@@ -67,6 +69,7 @@
 		37B295A72B3F620200F876DE /* ZnakomsyaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZnakomsyaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37B295AB2B3F620200F876DE /* ZnakomsyaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZnakomsyaUITests.swift; sourceTree = "<group>"; };
 		37B295AD2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZnakomsyaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37B30CC02BB60CC1000C0F75 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		6100B9452BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		6100B9462BAB294E00FBCE5D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		6100B9472BAB294E00FBCE5D /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37B30CBF2BB60C9F000C0F75 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +121,7 @@
 		37A9BDBA2B83E1E800660D04 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				37B30CC02BB60CC1000C0F75 /* TokenManager.swift */,
 				37A9BDC02B83FBE100660D04 /* ModelData.swift */,
 				37A9BDB62B83A28200660D04 /* RegistrationData.swift */,
 			);
@@ -156,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				6100B96A2BAB29CA00FBCE5D /* Info.plist */,
-				6100B9692BAB29AC00FBCE5D /* Fonts */,
 				37B295902B3F620100F876DE /* ZnakomsyaApp.swift */,
+				6100B9692BAB29AC00FBCE5D /* Fonts */,
 				37A9BDBB2B83E21700660D04 /* Views */,
 				37A9BDBA2B83E1E800660D04 /* Models */,
 				37B295942B3F620200F876DE /* Assets.xcassets */,
@@ -232,6 +237,9 @@
 			dependencies = (
 			);
 			name = Znakomsya;
+			packageProductDependencies = (
+				37B30CBE2BB60C9F000C0F75 /* KeychainSwift */,
+			);
 			productName = Znakomsya;
 			productReference = 37B2958D2B3F620100F876DE /* Znakomsya.app */;
 			productType = "com.apple.product-type.application";
@@ -304,6 +312,9 @@
 				Base,
 			);
 			mainGroup = 37B295842B3F620100F876DE;
+			packageReferences = (
+				37B30CBD2BB60C9F000C0F75 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 37B2958E2B3F620100F876DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37B295932B3F620100F876DE /* ContentView.swift in Sources */,
+				37B30CC12BB60CC1000C0F75 /* TokenManager.swift in Sources */,
 				37B295912B3F620100F876DE /* ZnakomsyaApp.swift in Sources */,
 				37A9BDB72B83A28200660D04 /* RegistrationData.swift in Sources */,
 				37A9BDC12B83FBE100660D04 /* ModelData.swift in Sources */,
@@ -700,6 +712,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		37B30CBD2BB60C9F000C0F75 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 21.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37B30CBE2BB60C9F000C0F75 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37B30CBD2BB60C9F000C0F75 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 37B295852B3F620100F876DE /* Project object */;
 }
