@@ -177,7 +177,7 @@ struct RegistrationView: View {
                                     switch result {
                                         case .success(let token):
                                             TokenManager.shared.saveToken(token)
-                                            // Добавьте действия после успешной регистрации
+                                            modelData.saveDataToCoreData(registrationData: modelData.registrationData)
                                         case .failure(let error):
                                             print("Ошибка регистрации: \(error)")
                                             // Обработка ошибки регистрации

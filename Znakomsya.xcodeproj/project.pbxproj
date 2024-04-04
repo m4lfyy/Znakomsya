@@ -18,6 +18,10 @@
 		37B295AE2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B295AD2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift */; };
 		37B30CBF2BB60C9F000C0F75 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 37B30CBE2BB60C9F000C0F75 /* KeychainSwift */; };
 		37B30CC12BB60CC1000C0F75 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B30CC02BB60CC1000C0F75 /* TokenManager.swift */; };
+		37FC60622BB8234E0042E595 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37FC60602BB8234E0042E595 /* CoreDataModel.xcdatamodeld */; };
+		37FC60692BB828D40042E595 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC60672BB828D40042E595 /* User+CoreDataClass.swift */; };
+		37FC606A2BB828D40042E595 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC60682BB828D40042E595 /* User+CoreDataProperties.swift */; };
+		37FC606D2BB82EC90042E595 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC606C2BB82EC90042E595 /* CoreDataStack.swift */; };
 		6100B9572BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9452BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf */; };
 		6100B9582BAB294E00FBCE5D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9462BAB294E00FBCE5D /* Montserrat-Bold.ttf */; };
 		6100B9592BAB294E00FBCE5D /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9472BAB294E00FBCE5D /* Montserrat-Italic.ttf */; };
@@ -70,6 +74,10 @@
 		37B295AB2B3F620200F876DE /* ZnakomsyaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZnakomsyaUITests.swift; sourceTree = "<group>"; };
 		37B295AD2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZnakomsyaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		37B30CC02BB60CC1000C0F75 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		37FC60612BB8234E0042E595 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		37FC60672BB828D40042E595 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		37FC60682BB828D40042E595 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37FC606C2BB82EC90042E595 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6100B9452BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		6100B9462BAB294E00FBCE5D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		6100B9472BAB294E00FBCE5D /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
@@ -124,6 +132,7 @@
 				37B30CC02BB60CC1000C0F75 /* TokenManager.swift */,
 				37A9BDC02B83FBE100660D04 /* ModelData.swift */,
 				37A9BDB62B83A28200660D04 /* RegistrationData.swift */,
+				37FC60602BB8234E0042E595 /* CoreDataModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +171,7 @@
 			children = (
 				6100B96A2BAB29CA00FBCE5D /* Info.plist */,
 				37B295902B3F620100F876DE /* ZnakomsyaApp.swift */,
+				37FC606B2BB82E860042E595 /* CoreData */,
 				6100B9692BAB29AC00FBCE5D /* Fonts */,
 				37A9BDBB2B83E21700660D04 /* Views */,
 				37A9BDBA2B83E1E800660D04 /* Models */,
@@ -194,6 +204,16 @@
 				37B295AD2B3F620200F876DE /* ZnakomsyaUITestsLaunchTests.swift */,
 			);
 			path = ZnakomsyaUITests;
+			sourceTree = "<group>";
+		};
+		37FC606B2BB82E860042E595 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				37FC60682BB828D40042E595 /* User+CoreDataProperties.swift */,
+				37FC60672BB828D40042E595 /* User+CoreDataClass.swift */,
+				37FC606C2BB82EC90042E595 /* CoreDataStack.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		6100B9692BAB29AC00FBCE5D /* Fonts */ = {
@@ -380,7 +400,11 @@
 				37B295912B3F620100F876DE /* ZnakomsyaApp.swift in Sources */,
 				37A9BDB72B83A28200660D04 /* RegistrationData.swift in Sources */,
 				37A9BDC12B83FBE100660D04 /* ModelData.swift in Sources */,
+				37FC606D2BB82EC90042E595 /* CoreDataStack.swift in Sources */,
+				37FC60622BB8234E0042E595 /* CoreDataModel.xcdatamodeld in Sources */,
+				37FC60692BB828D40042E595 /* User+CoreDataClass.swift in Sources */,
 				61544B562BB1A8CC0044B792 /* RegistrationView.swift in Sources */,
+				37FC606A2BB828D40042E595 /* User+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +755,20 @@
 			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		37FC60602BB8234E0042E595 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				37FC60612BB8234E0042E595 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 37FC60612BB8234E0042E595 /* CoreDataModel.xcdatamodel */;
+			name = CoreDataModel.xcdatamodeld;
+			path = ../CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 37B295852B3F620100F876DE /* Project object */;
 }
