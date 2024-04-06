@@ -1,11 +1,3 @@
-//
-//  User+CoreDataProperties.swift
-//  Znakomsya
-//
-//  Created by Павел Панчук on 30.03.2024.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -18,7 +10,7 @@ extension User {
 
     @NSManaged public var name: String?
     @NSManaged public var gender: String?
-    @NSManaged public var birthData: Date?
+    @NSManaged public var birthDate: Date?
     @NSManaged public var email: String?
     @NSManaged public var phone: String?
     @NSManaged public var password: String?
