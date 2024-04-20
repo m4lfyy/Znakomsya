@@ -137,6 +137,7 @@ struct RegistrationView: View {
                         VStack (alignment: .leading){
                             HStack (spacing: 10) {
                                 Image("pass_img")
+                                    .opacity(0.6)
                             SecureField("Введите пароль", text: $modelData.registrationData.password)
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
@@ -154,6 +155,7 @@ struct RegistrationView: View {
                         VStack (alignment: .leading){
                             HStack (spacing: 10) {
                                 Image("pass_img")
+                                    .opacity(0.6)
                             SecureField("Подтвердите пароль", text: $confirmPassword)
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
@@ -165,7 +167,7 @@ struct RegistrationView: View {
                                 .background(Color(.black).opacity(0.4))
                         }
                         .padding(.horizontal)
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 15)
                         
                         // Стек для кнопки
                         Button(action: {
@@ -191,10 +193,10 @@ struct RegistrationView: View {
                                 .font(.custom("Montserrat-Medium", size: 18))
                                 .padding(.vertical)
                                 .padding(.horizontal, 50)
+                                .frame(width: 240)
                                 .background(Color(red: 1, green: 0.89, blue: 0.89).opacity(0.60))
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
-                        .padding(.top, 10)
                         .alert(isPresented: $showAlert) {
                             Alert(title: Text("Ошибка"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                         }

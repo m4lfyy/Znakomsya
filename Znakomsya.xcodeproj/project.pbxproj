@@ -41,6 +41,7 @@
 		6100B9672BAB294E00FBCE5D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9552BAB294E00FBCE5D /* Montserrat-Light.ttf */; };
 		6100B9682BAB294E00FBCE5D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9562BAB294E00FBCE5D /* Montserrat-Medium.ttf */; };
 		61544B562BB1A8CC0044B792 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61544B552BB1A8CC0044B792 /* RegistrationView.swift */; };
+		61B046C22BD3EC3A0090CB56 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B046C12BD3EC3A0090CB56 /* AuthorizationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		6100B9562BAB294E00FBCE5D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		6100B96A2BAB29CA00FBCE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		61544B552BB1A8CC0044B792 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		61B046C12BD3EC3A0090CB56 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			children = (
 				37B295922B3F620100F876DE /* ContentView.swift */,
 				61544B552BB1A8CC0044B792 /* RegistrationView.swift */,
+				61B046C12BD3EC3A0090CB56 /* AuthorizationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				37A110372BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld in Sources */,
 				37A110412BBEEBD4002A4DE4 /* User+CoreDataProperties.swift in Sources */,
 				61544B562BB1A8CC0044B792 /* RegistrationView.swift in Sources */,
+				61B046C22BD3EC3A0090CB56 /* AuthorizationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
