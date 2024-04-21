@@ -3,14 +3,15 @@ import CoreData
 
 class ModelData: ObservableObject {
     @Published var registrationData: RegistrationData = RegistrationData()
-    
-    func registerUser(completion: @escaping (Result<String, Error>) -> Void) {
-        guard let jsonData = try? JSONEncoder().encode(registrationData) else {
+    @Published var loginData: LoginData = LoginData()
+
+    private func sendDataToServer<T: Encodable>(urlString: String, data: T, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let jsonData = try? JSONEncoder().encode(data) else {
             completion(.failure(MyError.encodingError))
             return
         }
 
-        guard let url = URL(string: "http://your-server-url/register") else {
+        guard let url = URL(string: urlString) else {
             completion(.failure(MyError.invalidURL))
             return
         }
@@ -28,10 +29,21 @@ class ModelData: ObservableObject {
 
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
-                    if let token = try? JSONDecoder().decode(Token.self, from: data) {
-                        completion(.success(token.token))
-                    } else {
-                        completion(.failure(MyError.parsingError))
+                    if urlString == "http://your-server-url/register" {
+                        if let token = try? JSONDecoder().decode(Token.self, from: data) {
+                            TokenManager.shared.saveToken(token.token) // Сохранение токена при успешной регистрации
+                            self.saveDataToCoreData(registrationData: self.registrationData) // Сохранение данных в CoreData
+                            completion(.success(()))
+                        } else {
+                            completion(.failure(MyError.parsingError))
+                        }
+                    } else if urlString == "http://your-server-url/login" {
+                        if let token = try? JSONDecoder().decode(Token.self, from: data) {
+                            TokenManager.shared.saveToken(token.token) // Сохранение токена при успешной авторизации
+                            completion(.success(()))
+                        } else {
+                            completion(.failure(MyError.parsingError))
+                        }
                     }
                 } else {
                     completion(.failure(MyError.serverError))
@@ -39,16 +51,24 @@ class ModelData: ObservableObject {
             }
         }.resume()
     }
-    
+
+    func registerUser(completion: @escaping (Result<Void, Error>) -> Void) {
+        sendDataToServer(urlString: "http://your-server-url/register", data: registrationData, completion: completion)
+    }
+
+    func loginUser(completion: @escaping (Result<Void, Error>) -> Void) {
+        sendDataToServer(urlString: "http://your-server-url/login", data: loginData, completion: completion)
+    }
+
     func saveDataToCoreData(registrationData: RegistrationData) {
         let managedContext = CoreDataStack.shared.managedContext
-        
+
         // Создаем новый объект User в контексте управляемых объектов Core Data
         guard let userEntity = NSEntityDescription.entity(forEntityName: "User", in: managedContext) else {
             fatalError("Failed to retrieve User entity description")
         }
         let user = NSManagedObject(entity: userEntity, insertInto: managedContext)
-        
+
         // Устанавливаем значения атрибутов объекта User из данных регистрации
         user.setValue(registrationData.name, forKey: "name")
         user.setValue(registrationData.gender, forKey: "gender")
@@ -56,7 +76,7 @@ class ModelData: ObservableObject {
         user.setValue(registrationData.email, forKey: "email")
         user.setValue(registrationData.phone, forKey: "phone")
         user.setValue(registrationData.password, forKey: "password")
-        
+
         // Сохраняем изменения в контексте управляемых объектов Core Data
         do {
             try managedContext.save()

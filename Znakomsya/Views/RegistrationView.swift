@@ -177,12 +177,13 @@ struct RegistrationView: View {
                             } else {
                                 modelData.registerUser { result in
                                     switch result {
-                                        case .success(let token):
-                                            TokenManager.shared.saveToken(token)
-                                            modelData.saveDataToCoreData(registrationData: modelData.registrationData)
-                                        case .failure(let error):
-                                            print("Ошибка регистрации: \(error)")
-                                            // Обработка ошибки регистрации
+                                    case .success:
+                                        // Обработка успеха
+                                        showAlert = true
+                                        alertMessage = "Регистрация прошла успешно"
+                                    case .failure(let error):
+                                        // Обработка ошибки регистрации
+                                        print("Ошибка регистрации: \(error)")
                                     }
                                 }
                             }
@@ -204,8 +205,6 @@ struct RegistrationView: View {
                     .padding(.horizontal)
                 }
             }
-            
-            
         }
     }
 }
