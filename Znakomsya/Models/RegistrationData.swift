@@ -2,10 +2,10 @@ import SwiftUI
 
 struct RegistrationData {
     var name: String = ""
-    var gender: String = "М"
-    var birthDate: Date = Date()
+    var sex: String = "М"
+    var date_of_birth: Date = Date()
     var email: String = ""
-    var phone: String = ""
+    var phone_number: String = ""
     var password: String = ""
     
     // Функция для проверки всех введенных данных
@@ -19,7 +19,7 @@ struct RegistrationData {
             return "Введите адрес электронной почты"
         case !validateEmail():
             return "Введите корректный адрес электронной почты"
-        case phone.isEmpty:
+        case phone_number.isEmpty:
             return "Введите номер телефона"
         case !validatePhoneNumber():
             return "Введите корректный номер телефона"
@@ -40,7 +40,7 @@ struct RegistrationData {
         let currentDate = Date()
         let minBirthDate = calendar.date(byAdding: .year, value: -16, to: currentDate)!
         
-        return birthDate <= minBirthDate
+        return date_of_birth <= minBirthDate
     }
     
     // Функция для валидации почты
@@ -54,7 +54,7 @@ struct RegistrationData {
     private func validatePhoneNumber() -> Bool {
         let phoneRegex = "^\\+7[0-9]{10}$"
         let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-        return phonePredicate.evaluate(with: phone)
+        return phonePredicate.evaluate(with: phone_number)
     }
     
     // Функция для проверки совпадения паролей
@@ -65,16 +65,16 @@ struct RegistrationData {
 
 extension RegistrationData: Encodable {
     enum CodingKeys: String, CodingKey {
-        case name, gender, birthDate, email, phone, password
+        case name, sex, date_of_birth, email, phone_number, password
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(gender, forKey: .gender)
-        try container.encode(birthDate, forKey: .birthDate)
+        try container.encode(sex, forKey: .sex)
+        try container.encode(date_of_birth, forKey: .date_of_birth)
         try container.encode(email, forKey: .email)
-        try container.encode(phone, forKey: .phone)
+        try container.encode(phone_number, forKey: .phone_number)
         try container.encode(password, forKey: .password)
     }
 }

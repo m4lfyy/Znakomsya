@@ -32,7 +32,7 @@ struct AuthorizationView: View {
                             VStack (alignment: .leading){
                                 HStack (spacing: 10) {
                                     Image("name_img")
-                                    TextField("Логин", text: $modelData.loginData.username)
+                                    TextField("Почта", text: $modelData.loginData.username)
                                         .font(Font.custom("Montserrat-Meduim", size: 18))
                                         .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                         .frame(width: 230)
@@ -77,7 +77,7 @@ struct AuthorizationView: View {
                                             alertMessage = "Авторизация прошла успешно"
                                         case .failure(let error):
                                             // Обработка ошибки регистрации
-                                            print("Ошибка регистрации: \(error)")
+                                            print("Ошибка авторизации: \(error)")
                                         }
                                     }
                                 }

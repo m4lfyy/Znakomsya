@@ -58,7 +58,7 @@ struct RegistrationView: View {
                                 Image("male_img")
                                     .opacity(0.6)
                                 
-                                Picker("", selection: $modelData.registrationData.gender) {
+                                Picker("", selection: $modelData.registrationData.sex) {
                                     Text("Мужской").tag("М")
                                     Text("Женский").tag("Ж")
                                 }
@@ -81,7 +81,7 @@ struct RegistrationView: View {
                             HStack (spacing: 10) {
                                 Image("calendar_img")
                                     .opacity(0.6)
-                                DatePicker ("Дата ", selection: $modelData.registrationData.birthDate, in: ...Date(), displayedComponents: .date)
+                                DatePicker ("Дата ", selection: $modelData.registrationData.date_of_birth, in: ...Date(), displayedComponents: .date)
                                     .frame(width: 220)
                                     .font(.custom("Montserrat-Light", size: 16))
                                     .foregroundColor(Color(red: 0.28, green: 0.28, blue: 0.29).opacity(0.70))
@@ -119,7 +119,7 @@ struct RegistrationView: View {
                             HStack (spacing: 10) {
                                 Image("phone_img")
                                     .opacity(0.6)
-                                TextField("Номер телефона", text: $modelData.registrationData.phone)
+                                TextField("Номер телефона", text: $modelData.registrationData.phone_number)
                                     .keyboardType(.phonePad)
                                     .font(Font.custom("Montserrat-Meduim", size: 18))
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))

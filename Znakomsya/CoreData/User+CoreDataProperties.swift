@@ -9,11 +9,12 @@ extension User {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var gender: String?
-    @NSManaged public var birthDate: Date?
+    @NSManaged public var sex: String?
+    @NSManaged public var date_of_birth: String?
     @NSManaged public var email: String?
-    @NSManaged public var phone: String?
-    @NSManaged public var password: String?
+    @NSManaged public var phone_number: String?
+    @NSManaged public var id: String?
+    @NSManaged public var registered_at: String?
 
 }
 

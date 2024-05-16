@@ -8,7 +8,7 @@ struct LoginData {
     func validationError() -> String? {
         switch true {
         case username.isEmpty:
-            return "Введите логин"
+            return "Введите почту"
         case password.isEmpty:
             return "Введите пароль"
         default:
