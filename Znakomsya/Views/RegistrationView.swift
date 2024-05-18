@@ -183,7 +183,8 @@ struct RegistrationView: View {
                                         alertMessage = "Регистрация прошла успешно"
                                     case .failure(let error):
                                         // Обработка ошибки регистрации
-                                        print("Ошибка регистрации: \(error)")
+                                        showAlert = true
+                                        alertMessage = error.localizedDescription
                                     }
                                 }
                             }

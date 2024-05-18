@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		37090BB52BD583B600C2C506 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37090BB42BD583B600C2C506 /* LoginData.swift */; };
+		370C1E392BF7D016001D69A0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370C1E382BF7D016001D69A0 /* NetworkService.swift */; };
+		370C1E3B2BF7D055001D69A0 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370C1E3A2BF7D055001D69A0 /* Errors.swift */; };
 		37A110372BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37A110352BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld */; };
 		37A110402BBEEBD4002A4DE4 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A1103E2BBEEBD4002A4DE4 /* User+CoreDataClass.swift */; };
 		37A110412BBEEBD4002A4DE4 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A1103F2BBEEBD4002A4DE4 /* User+CoreDataProperties.swift */; };
@@ -64,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		37090BB42BD583B600C2C506 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
+		370C1E382BF7D016001D69A0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		370C1E3A2BF7D055001D69A0 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		37A110362BBEE615002A4DE4 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		37A1103E2BBEEBD4002A4DE4 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37A1103F2BBEEBD4002A4DE4 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -133,10 +137,12 @@
 		37A9BDBA2B83E1E800660D04 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				37B30CC02BB60CC1000C0F75 /* TokenManager.swift */,
 				37A9BDC02B83FBE100660D04 /* ModelData.swift */,
 				37A9BDB62B83A28200660D04 /* RegistrationData.swift */,
 				37090BB42BD583B600C2C506 /* LoginData.swift */,
+				370C1E382BF7D016001D69A0 /* NetworkService.swift */,
+				37B30CC02BB60CC1000C0F75 /* TokenManager.swift */,
+				370C1E3A2BF7D055001D69A0 /* Errors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -407,11 +413,13 @@
 				37A9BDB72B83A28200660D04 /* RegistrationData.swift in Sources */,
 				37A9BDC12B83FBE100660D04 /* ModelData.swift in Sources */,
 				37090BB52BD583B600C2C506 /* LoginData.swift in Sources */,
+				370C1E3B2BF7D055001D69A0 /* Errors.swift in Sources */,
 				37A110402BBEEBD4002A4DE4 /* User+CoreDataClass.swift in Sources */,
 				37FC606D2BB82EC90042E595 /* CoreDataStack.swift in Sources */,
 				37A110372BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld in Sources */,
 				37A110412BBEEBD4002A4DE4 /* User+CoreDataProperties.swift in Sources */,
 				61544B562BB1A8CC0044B792 /* RegistrationView.swift in Sources */,
+				370C1E392BF7D016001D69A0 /* NetworkService.swift in Sources */,
 				61B046C22BD3EC3A0090CB56 /* AuthorizationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

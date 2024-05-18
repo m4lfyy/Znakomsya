@@ -77,7 +77,8 @@ struct AuthorizationView: View {
                                             alertMessage = "Авторизация прошла успешно"
                                         case .failure(let error):
                                             // Обработка ошибки регистрации
-                                            print("Ошибка авторизации: \(error)")
+                                            showAlert = true
+                                            alertMessage = error.localizedDescription
                                         }
                                     }
                                 }

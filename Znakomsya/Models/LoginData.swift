@@ -1,10 +1,9 @@
-import SwiftUI
+import Foundation
 
-struct LoginData {
+struct LoginData: Encodable {
     var username: String = ""
     var password: String = ""
-
-    // Функция для проверки введенных данных
+    
     func validationError() -> String? {
         switch true {
         case username.isEmpty:
@@ -12,20 +11,12 @@ struct LoginData {
         case password.isEmpty:
             return "Введите пароль"
         default:
-            return nil // Если все поля валидны, возвращаем nil
+            return nil
         }
     }
 }
 
-extension LoginData: Encodable {
-    enum CodingKeys: String, CodingKey {
-        case username, password
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(username, forKey: .username)
-        try container.encode(password, forKey: .password)
-    }
+struct LoginResponse: Decodable {
+    let access_token: String
+    let token_type: String
 }
-
