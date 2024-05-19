@@ -1,4 +1,3 @@
-import SwiftUI
 import CoreData
 
 class ModelData: ObservableObject {
@@ -6,6 +5,9 @@ class ModelData: ObservableObject {
     @Published var loginData: LoginData = LoginData()
     
     static let shared = ModelData()
+    
+    // Сохранение данных регистрации временно
+    var registrationResponse: RegistrationResponse?
     
     func saveDataToCoreData(successfulResponse: RegistrationResponse) {
         let managedContext = CoreDataStack.shared.managedContext
@@ -33,12 +35,31 @@ class ModelData: ObservableObject {
     }
     
     func registerUser(completion: @escaping (Result<Void, MyError>) -> Void) {
-        NetworkService.shared.registerUser(with: registrationData, completion: completion)
+        NetworkService.shared.registerUser(with: registrationData) { result in
+            switch result {
+            case .success(let userResponse):
+                self.registrationResponse = userResponse
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func loginUser(completion: @escaping (Result<Void, MyError>) -> Void) {
-        NetworkService.shared.loginUser(with: loginData, completion: completion)
+        NetworkService.shared.loginUser(with: loginData) { result in
+            switch result {
+            case .success:
+                if let userResponse = self.registrationResponse {
+                    self.saveDataToCoreData(successfulResponse: userResponse)
+                    completion(.success(()))
+                } else {
+                    completion(.failure(.unknownServerError))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
-    
 }
 

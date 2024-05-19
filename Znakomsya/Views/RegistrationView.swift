@@ -178,11 +178,9 @@ struct RegistrationView: View {
                                 modelData.registerUser { result in
                                     switch result {
                                     case .success:
-                                        // Обработка успеха
                                         showAlert = true
-                                        alertMessage = "Регистрация прошла успешно"
+                                        alertMessage = "Регистрация прошла успешно. Пожалуйста, проверьте вашу почту для подтверждения."
                                     case .failure(let error):
-                                        // Обработка ошибки регистрации
                                         showAlert = true
                                         alertMessage = error.localizedDescription
                                     }
