@@ -4,6 +4,7 @@ struct AuthorizationView: View {
     @EnvironmentObject var modelData: ModelData
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var isKeyboardVisible = false
     
     var body: some View {
         NavigationView {
@@ -36,6 +37,8 @@ struct AuthorizationView: View {
                                         .font(Font.custom("Montserrat-Meduim", size: 18))
                                         .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                         .frame(width: 230)
+                                        .autocapitalization(.none)
+                                        .keyboardType(.emailAddress)
                                 }
                                 Rectangle ()
                                     .frame(width: 280, height: 1)
@@ -181,7 +184,16 @@ struct AuthorizationView: View {
                 }
                 .padding(.bottom, 30)
             }
+            .gesture(DragGesture().onChanged({ _ in
+                hideKeyboard()
+            }))
+            .ignoresSafeArea(.keyboard)
+            .navigationBarBackButtonHidden(true)
         }
+    }
+    // Функция для скрытия клавиатуры
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
