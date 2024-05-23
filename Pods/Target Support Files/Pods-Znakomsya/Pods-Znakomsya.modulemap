@@ -1,0 +1,6 @@
+framework module Pods_Znakomsya {
+  umbrella header "Pods-Znakomsya-umbrella.h"
+
+  export *
+  module * { export * }
+}

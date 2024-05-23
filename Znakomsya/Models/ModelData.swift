@@ -1,4 +1,5 @@
 import CoreData
+import GoogleSignIn
 
 class ModelData: ObservableObject {
     @Published var registrationData: RegistrationData = RegistrationData()
@@ -61,5 +62,49 @@ class ModelData: ObservableObject {
             }
         }
     }
-}
+    
+    func signInWithGoogle() {
+        guard let clientID = GIDSignIn.sharedInstance.configuration?.clientID else { return }
+        let _ = GIDConfiguration(clientID: clientID, serverClientID: "331638865125-t9vf96bv08pr9viripqgeolikg8j2s1u.apps.googleusercontent.com")
 
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            print("Unable to access root view controller")
+            return
+        }
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { signInResult, error in
+            if let error = error {
+                print("Sign in failed: \(error)")
+                return
+            }
+
+            guard let signInResult = signInResult else { return }
+            print("Sign in succeeded: \(signInResult.user.profile?.name ?? "No name")")
+
+            guard let authorizationCode = signInResult.serverAuthCode else {
+                print("Failed to get authorization code")
+                return
+            }
+            
+            print(authorizationCode)
+
+            NetworkService.shared.getStateToken { result in
+                switch result {
+                case .success(let stateToken):
+                    NetworkService.shared.sendAuthorizationCodeToServer(authorizationCode, state: stateToken) { result in
+                        switch result {
+                        case .success(let accessToken):
+                            print("Access token received successfully: \(accessToken)")
+                            TokenManager.shared.saveToken(accessToken)
+                        case .failure(let error):
+                            print("Failed to send authorization code: \(error)")
+                        }
+                    }
+                case .failure(let error):
+                    print("Failed to get state token: \(error)")
+                }
+            }
+        }
+    }
+}

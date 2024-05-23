@@ -1,4 +1,5 @@
 import SwiftUI
+import GoogleSignIn
 
 struct AuthorizationView: View {
     @EnvironmentObject var modelData: ModelData
@@ -151,7 +152,7 @@ struct AuthorizationView: View {
                             VStack (alignment: .leading) {
                                 HStack (spacing: 25) {
                                     Button(action: {
-                                        
+                                        modelData.signInWithGoogle()
                                     }) {
                                         Image("google_img")
                                             .resizable()

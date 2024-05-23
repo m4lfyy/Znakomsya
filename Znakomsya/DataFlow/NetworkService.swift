@@ -85,14 +85,7 @@ class NetworkService {
                     do {
                         let tokenResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
                         TokenManager.shared.saveToken(tokenResponse.access_token)
-                        
-                        // Использовать данные пользователя, сохраненные после регистрации
-                        if let userResponse = ModelData.shared.registrationResponse {
-                            ModelData.shared.saveDataToCoreData(successfulResponse: userResponse)
-                            completion(.success(()))
-                        } else {
-                            completion(.failure(.unknownServerError))
-                        }
+                        completion(.success(()))
                     } catch {
                         completion(.failure(.parsingError))
                     }
@@ -139,6 +132,69 @@ class NetworkService {
                 switch httpResponse.statusCode {
                 case 202:
                     completion(.success(()))
+                default:
+                    completion(.failure(.unknownServerError))
+                }
+            } else {
+                completion(.failure(.unknownServerError))
+            }
+        }.resume()
+    }
+    
+    func getStateToken(completion: @escaping (Result<String, MyError>) -> Void) {
+        guard let url = URL(string: "http://localhost:8080/google/state_token") else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                completion(.failure(.clientError))
+                return
+            }
+
+            if let data = data, let stateToken = String(data: data, encoding: .utf8) {
+                completion(.success(stateToken))
+            } else {
+                completion(.failure(.unknownServerError))
+            }
+        }.resume()
+    }
+    
+    func sendAuthorizationCodeToServer(_ authorizationCode: String, state: String, completion: @escaping (Result<String, MyError>) -> Void) {
+        // Создаем URL с параметрами
+        var components = URLComponents(string: "http://localhost:8080/google/callback")
+        components?.queryItems = [
+            URLQueryItem(name: "code", value: authorizationCode),
+            URLQueryItem(name: "state", value: state)
+        ]
+        
+        guard let url = components?.url else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        // Создаем GET-запрос
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                completion(.failure(.clientError))
+                return
+            }
+
+            if let httpResponse = response as? HTTPURLResponse {
+                switch httpResponse.statusCode {
+                case 200:
+                    if let data = data, let accessToken = String(data: data, encoding: .utf8) {
+                        completion(.success(accessToken))
+                    } else {
+                        completion(.failure(.unknownServerError))
+                    }
                 default:
                     completion(.failure(.unknownServerError))
                 }
