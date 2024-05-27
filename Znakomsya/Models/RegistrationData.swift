@@ -20,8 +20,6 @@ struct RegistrationData: Encodable {
             return "Введите корректный адрес электронной почты"
         case phone_number.isEmpty:
             return "Введите номер телефона"
-        case !validatePhoneNumber():
-            return "Введите корректный номер телефона"
         case password.isEmpty:
             return "Введите пароль"
         case check.isEmpty:
@@ -46,23 +44,7 @@ struct RegistrationData: Encodable {
         return emailPredicate.evaluate(with: email)
     }
     
-    private func validatePhoneNumber() -> Bool {
-        let phoneRegex = "^\\+7[0-9]{10}$"
-        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-        return phonePredicate.evaluate(with: phone_number)
-    }
-    
     private func validatePasswordMatch(check: String) -> Bool {
         return password == check
     }
-}
-
-struct RegistrationResponse: Decodable {
-    let id: String
-    let email: String
-    let name: String
-    let phone_number: String
-    let sex: String
-    let date_of_birth: String
-    let registered_at: String
 }
