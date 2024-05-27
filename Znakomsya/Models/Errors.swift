@@ -1,16 +1,18 @@
 import Foundation
 
 enum MyError: Error {
-    case encodingError
+    case encodError
     case invalidURL
     case parsingError
     case clientError
     case serverError(String)
     case unknownServerError
+    case coreDataSaveError
+    case coreDataFetchError
     
     var localizedDescription: String {
         switch self {
-        case .encodingError:
+        case .encodError:
             return "Ошибка при кодировании данных."
         case .invalidURL:
             return "Некорректный URL."
@@ -22,6 +24,10 @@ enum MyError: Error {
             return "Ошибка: \(message)"
         case .unknownServerError:
             return "Неизвестная ошибка на стороне сервера."
+        case .coreDataSaveError:
+            return "Не удалось обновить данные в CoreData"
+        case .coreDataFetchError:
+            return "Не удалось взять данные с CoreData"
         }
     }
 }
