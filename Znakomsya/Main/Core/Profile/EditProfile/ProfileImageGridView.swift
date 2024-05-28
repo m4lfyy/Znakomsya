@@ -8,18 +8,37 @@
 import SwiftUI
 
 struct ProfileImageGridView: View {
-    
-    let user: UserInfo
+    @EnvironmentObject var modelData: ModelData
+    @State private var isImagePickerPresented = false
+    @State private var selectedImage: UIImage?
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(0 ..< 6) { index in
-                if index < user.profileImageURLs.count {
-                    Image(user.profileImageURLs[index])
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: imageWidth, height: imageHeight)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                let imageArray = modelData.profileData.profileImageArray()
+                if index < imageArray.count {
+                    if let uiImage = imageArray[index] {
+                        ZStack (alignment: .bottomTrailing){
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: imageWidth, height: imageHeight)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                            Image(systemName: "pencil")
+                                .imageScale(.medium)
+                                .fontWeight(.heavy)
+                                .foregroundStyle(.pink)
+                                .background {
+                                    Circle()
+                                        .fill(Color(red: 0.93, green: 0.93, blue: 0.93))
+                                        .frame(width: 25, height: 25)
+                                }
+                                .offset(x: 4, y: 4)
+                                .onTapGesture {
+                                    isImagePickerPresented = true
+                                }
+                        }
+                    }
                 } else {
                     ZStack(alignment: .bottomTrailing){
                         RoundedRectangle(cornerRadius: 10)
@@ -28,11 +47,24 @@ struct ProfileImageGridView: View {
                         
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.large)
+                            .fontWeight(.heavy)
                             .foregroundStyle(.pink)
                             .offset(x: 4, y: 4)
+                            .onTapGesture {
+                                isImagePickerPresented = true
+                            }
                     }
                 }
             }
+        }
+        .sheet(isPresented: $isImagePickerPresented) {
+            ImagePicker(selectedImage: $selectedImage, onImagePicked: { image in
+                if let image = image {
+                    modelData.profileData.updateProfilePhoto(image)
+                }
+                // Сброс состояния после выбора изображения
+                selectedImage = nil
+            })
         }
     }
 }
@@ -40,9 +72,9 @@ struct ProfileImageGridView: View {
 private extension ProfileImageGridView {
     var columns: [GridItem] {
         [
-        .init(.flexible()),
-        .init(.flexible()),
-        .init(.flexible())
+            .init(.flexible()),
+            .init(.flexible()),
+            .init(.flexible())
         ]
     }
     
@@ -56,5 +88,5 @@ private extension ProfileImageGridView {
 }
 
 #Preview {
-    ProfileImageGridView(user: MockData.users[0])
+    ProfileImageGridView().environmentObject(ModelData())
 }

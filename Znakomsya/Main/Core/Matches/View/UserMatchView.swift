@@ -10,6 +10,7 @@ import SwiftUI
 struct UserMatchView: View {
     @Binding var show: Bool
     @EnvironmentObject var matchManager: MatchManager
+    @EnvironmentObject var modelData: ModelData
     
     var body: some View {
         ZStack {
@@ -33,16 +34,19 @@ struct UserMatchView: View {
                 }
                 
                 HStack(spacing: 16) {
-                    Image(MockData.users[0].profileImageURLs[0])
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 150, height: 150)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle()
-                                .stroke(.white, lineWidth: 2)
-                                .shadow(radius: 4)
-                        }
+                    let imageArray = modelData.profileData.profileImageArray()
+                    if let uiImage = imageArray[0] {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(.white, lineWidth: 2)
+                                    .shadow(radius: 4)
+                            }
+                    }
                     
                     if let matchedUser = matchManager.matchedUser {
                         Image(matchedUser.profileImageURLs[0])
@@ -76,5 +80,5 @@ struct UserMatchView: View {
 
 #Preview {
     UserMatchView(show:  .constant(true))
-        .environmentObject(MatchManager())
+        .environmentObject(MatchManager()).environmentObject(ModelData())
 }

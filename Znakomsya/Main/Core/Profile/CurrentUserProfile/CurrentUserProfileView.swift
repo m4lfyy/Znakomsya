@@ -9,13 +9,14 @@ import SwiftUI
 
 struct CurrentUserProfileView: View {
     @State private var showEditProfile = false
-    let user: UserInfo
+    @EnvironmentObject var modelData: ModelData
     
     var body: some View {
         NavigationStack {
             List {
                 // header view
-                CurrentUserProfileHeaderView(user: user)
+                CurrentUserProfileHeaderView()
+                    .environmentObject(modelData)
                     .onTapGesture {
                         showEditProfile.toggle()
                     }
@@ -27,7 +28,7 @@ struct CurrentUserProfileView: View {
                         
                         Spacer()
                         
-                        Text(user.fullname)
+                        Text(modelData.profileData.name)
                     }
                     
                     HStack {
@@ -35,7 +36,7 @@ struct CurrentUserProfileView: View {
                         
                         Spacer()
                         
-                        Text("test@gmail.com")
+                        Text(modelData.profileData.email)
                     }
                 }
                 
@@ -62,12 +63,12 @@ struct CurrentUserProfileView: View {
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
             .fullScreenCover(isPresented: $showEditProfile) {
-                EditProfileView(user: user)
+                EditProfileView().environmentObject(modelData)
             }
         }
     }
 }
 
 #Preview {
-    CurrentUserProfileView(user: MockData.users[1])
+    CurrentUserProfileView().environmentObject(ModelData())
 }

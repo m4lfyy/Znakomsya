@@ -1,14 +1,17 @@
 import Foundation
 import UIKit
 
-struct ProfileData {
+struct ProfileData: Hashable {
+    
+    var id: String = ""
+    
     // RegistrationData fields
     var name: String = ""
     var sex: String = "М"
     var date_of_birth: Date = Date()
     var email: String = ""
     var phone_number: String = ""
-
+    
     // ProfileData fields
     var location: String = ""
     var work: String = ""
@@ -18,12 +21,40 @@ struct ProfileData {
     var hobby: String = ""
     var interest_sex: String = ""
     var preferences_text: String = ""
-    var photo: UIImage? = UIImage(named: "defaultPhoto")
+    var photo: UIImage? = UIImage(named: "profphoto")
     var preferences_photo: UIImage?
     
     var photoUpdated: Bool = false
     var preferencesPhotoUpdated: Bool = false
+    var age: Int {
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: date_of_birth, to: Date())
+        return ageComponents.year!
+    }
     
+    func profileImageArray() -> [UIImage?] {
+        var images = [UIImage?]()
+        
+        // Добавить основное фото, если доступно
+        if let mainPhoto = photo {
+            images.append(mainPhoto)
+        }
+        
+        // Загрузить дополнительные фото из каталога Assets
+        let assetPhotoNames = ["test", "test1", "test2"] // Пример имен изображений в каталоге Assets
+        for photoName in assetPhotoNames {
+            if let image = UIImage(named: photoName) {
+                images.append(image)
+            }
+        }
+        
+        return images
+    }
+    
+    mutating func updateProfilePhoto(_ photo: UIImage) {
+        self.photo = photo
+        self.photoUpdated = true
+    }
 }
 
 struct ServerResponse: Decodable {

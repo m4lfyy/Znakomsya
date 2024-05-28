@@ -6,9 +6,10 @@ struct AuthorizationView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isKeyboardVisible = false
+    @State private var navigateToMainTab = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Image("bg_img")
                     .resizable()
@@ -77,8 +78,7 @@ struct AuthorizationView: View {
                                         switch result {
                                         case .success:
                                             // Обработка успеха
-                                            showAlert = true
-                                            alertMessage = "Авторизация прошла успешно"
+                                            navigateToMainTab = true
                                         case .failure(let error):
                                             // Обработка ошибки регистрации
                                             showAlert = true
@@ -189,8 +189,13 @@ struct AuthorizationView: View {
                 hideKeyboard()
             }))
             .ignoresSafeArea(.keyboard)
-            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $navigateToMainTab) {
+                MainTabView()
+                    .environmentObject(MatchManager())
+                    .environmentObject(modelData)
+            }
         }
+        .navigationBarBackButtonHidden(true)
     }
     // Функция для скрытия клавиатуры
     private func hideKeyboard() {

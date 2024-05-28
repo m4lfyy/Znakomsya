@@ -8,7 +8,7 @@ struct ZnakomsyaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            ContentView()
                 .environmentObject(modelData)
                 .environmentObject(matchManager)
         }

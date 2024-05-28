@@ -13,12 +13,12 @@ struct EditProfileView: View {
     @State private var bio = ""
     @State private var occupation = ""
     
-    let user: UserInfo
+    @EnvironmentObject var modelData: ModelData
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                ProfileImageGridView(user: user)
+                ProfileImageGridView().environmentObject(modelData)
                     .padding()
                 
                 VStack(spacing: 24) {
@@ -116,5 +116,5 @@ struct EditProfileView: View {
 }
 
 #Preview {
-    EditProfileView(user: MockData.users[0])
+    EditProfileView().environmentObject(ModelData())
 }

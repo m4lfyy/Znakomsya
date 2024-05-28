@@ -7,7 +7,7 @@ struct ContentView: View {
         NavigationView {
             AuthorizationView()
                 .environmentObject(modelData)
-//                .preferredColorScheme(.light)
+                .preferredColorScheme(.light)
         }
     }
 }

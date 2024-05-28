@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct UserProfileView: View {
+    @EnvironmentObject var modelData: ModelData
     @Environment(\.dismiss) var dismiss
     @State private var currentImageIndex = 0
-    
-    let user: UserInfo
     
     var body: some View {
         VStack {
             HStack {
-                Text(user.fullname)
+                Text(modelData.profileData.name)
                     .font(Font.custom("Montserrat-Bold", size: 24))
                 
-                Text("\(user.age)")
+                Text("\(modelData.profileData.age)")
                     .font(Font.custom("Montserrat-MediumItalic", size: 24))
                 
                 Spacer()
@@ -38,20 +37,23 @@ struct UserProfileView: View {
             ScrollView {
                 VStack {
                     ZStack(alignment: .top) {
-                        Image(user.profileImageURLs[currentImageIndex])
+                        let imageArray = modelData.profileData.profileImageArray()
+                        if let uiImage = imageArray[currentImageIndex] {
+                            Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: SizeConst.cardWidth, height: SizeConst.cardHeight)
                                 .overlay {
                                     ImageScrollingOverlay(
                                         currentImageIndex: $currentImageIndex,
-                                        imageCount: user.profileImageURLs.count
+                                        imageCount: imageArray.count
                                     )
                                 }
-                        CardImageIndicatorView(
-                            currentImageIndex: currentImageIndex,
-                            imageCount: user.profileImageURLs.count
-                        )
+                            CardImageIndicatorView(
+                                currentImageIndex: currentImageIndex,
+                                imageCount: imageArray.count
+                            )
+                        }
                     }
                     
                     VStack (alignment: .leading, spacing: 12){
@@ -97,5 +99,5 @@ struct UserProfileView: View {
 }
 
 #Preview {
-    UserProfileView(user: MockData.users[0])
+    UserProfileView().environmentObject(ModelData())
 }

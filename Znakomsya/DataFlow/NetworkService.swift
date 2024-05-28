@@ -280,13 +280,8 @@ class NetworkService {
                 return
             }
             
-            if let httpResponse = response as? HTTPURLResponse {
-                switch httpResponse.statusCode {
-                case 202:
-                    completion(.success(()))
-                default:
-                    completion(.failure(.unknownServerError))
-                }
+            if response is HTTPURLResponse {
+                completion(.success(()))
             } else {
                 completion(.failure(.unknownServerError))
             }

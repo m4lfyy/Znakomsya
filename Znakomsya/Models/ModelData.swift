@@ -34,20 +34,19 @@ class ModelData: ObservableObject {
                 
                 do {
                     let users = try managedContext.fetch(fetchRequest)
-                    if users.isEmpty {
-                        NetworkService.shared.getProfile(userEmail: self.loginData.username) { result in
-                            switch result {
-                            case .success(let userResponse):
-                                self.serverResponse = userResponse
+                    NetworkService.shared.getProfile(userEmail: self.loginData.username) { result in
+                        switch result {
+                        case .success(let userResponse):
+                            if users.isEmpty {
                                 self.registrationDataToCoreData(successfulResponse: userResponse)
-                                completion(.success(()))
-                            case .failure(let error):
-                                print("Get profile error: \(error)")
-                                completion(.failure(error))
                             }
+                            self.updateProfileData(from: userResponse)
+                            print(self.profileData)
+                            completion(.success(()))
+                        case .failure(let error):
+                            print("Get profile error: \(error)")
+                            completion(.failure(error))
                         }
-                    } else {
-                        completion(.success(()))
                     }
                 } catch {
                     completion(.failure(.coreDataFetchError))
@@ -58,6 +57,7 @@ class ModelData: ObservableObject {
             }
         }
     }
+
 
     func signInWithGoogle() {
         guard let clientID = GIDSignIn.sharedInstance.configuration?.clientID else { return }
@@ -117,6 +117,54 @@ class ModelData: ObservableObject {
         }
     }
     
+    func updateProfileData(from response: ServerResponse) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssX"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        profileData.id = response.id
+        profileData.email = response.email
+        profileData.name = response.name
+        profileData.phone_number = response.phone_number
+        profileData.sex = response.sex
+        
+        if let dateOfBirth = dateFormatter.date(from: response.date_of_birth) {
+            profileData.date_of_birth = dateOfBirth
+        } else {
+            print("Failed to parse date: \(response.date_of_birth)")
+            profileData.date_of_birth = Date()
+        }
+        
+        if let location = response.location {
+            profileData.location = location
+        }
+        if let work = response.work {
+            profileData.work = work
+        }
+        if let music = response.music {
+            profileData.music = music
+        }
+        if let films = response.films {
+            profileData.films = films
+        }
+        if let sport = response.sport {
+            profileData.sport = sport
+        }
+        if let hobby = response.hobby {
+            profileData.hobby = hobby
+        }
+        if let interestSex = response.interest_sex {
+            profileData.interest_sex = interestSex
+        }
+        if let preferencesText = response.preferences_text {
+            profileData.preferences_text = preferencesText
+        }
+        // You can add logic to update preferences_photo if needed.
+    }
+    
+    
     private func compareAndGenerateUpdateDictionary(currentProfileData: ProfileData) -> [String: Any] {
         let managedContext = CoreDataStack.shared.managedContext
         
@@ -124,7 +172,7 @@ class ModelData: ObservableObject {
         let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "User")
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
         
         do {
             if let user = try managedContext.fetch(fetchRequest).first {

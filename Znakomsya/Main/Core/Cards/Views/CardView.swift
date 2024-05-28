@@ -44,7 +44,7 @@ struct CardView: View {
             UserInfoView(showProfileModal: $showProfileModal, user: user)
         }
         .fullScreenCover(isPresented: $showProfileModal) {
-            UserProfileView(user: user)
+            UserProfileView().environmentObject(ModelData())
         }
         .onReceive(viewModel.$buttonSwipeAction, perform: { action in
             onReceiveSwipeAction(action)

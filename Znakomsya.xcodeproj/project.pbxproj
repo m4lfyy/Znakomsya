@@ -48,6 +48,7 @@
 		6100B9662BAB294E00FBCE5D /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9542BAB294E00FBCE5D /* Montserrat-ExtraLightItalic.ttf */; };
 		6100B9672BAB294E00FBCE5D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9552BAB294E00FBCE5D /* Montserrat-Light.ttf */; };
 		6100B9682BAB294E00FBCE5D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9562BAB294E00FBCE5D /* Montserrat-Medium.ttf */; };
+		612DFA132C0574620085E8AB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612DFA122C0574620085E8AB /* ImagePicker.swift */; };
 		61544B562BB1A8CC0044B792 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61544B552BB1A8CC0044B792 /* RegistrationView.swift */; };
 		617A4D422BFA9E1D000F4DB7 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617A4D412BFA9E1D000F4DB7 /* PhoneNumberFormatter.swift */; };
 		61B046C22BD3EC3A0090CB56 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B046C12BD3EC3A0090CB56 /* AuthorizationView.swift */; };
@@ -137,6 +138,7 @@
 		6100B9552BAB294E00FBCE5D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		6100B9562BAB294E00FBCE5D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		6100B96A2BAB29CA00FBCE5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		612DFA122C0574620085E8AB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		61544B552BB1A8CC0044B792 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		617A4D412BFA9E1D000F4DB7 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		61B046C12BD3EC3A0090CB56 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 			children = (
 				61B94C7F2C04C41100E20EC7 /* EditProfileView.swift */,
 				61B94C812C04C63500E20EC7 /* ProfileImageGridView.swift */,
+				612DFA122C0574620085E8AB /* ImagePicker.swift */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				37090BB52BD583B600C2C506 /* LoginData.swift in Sources */,
 				370C1E3B2BF7D055001D69A0 /* Errors.swift in Sources */,
 				61B94C4F2BFF9C9B00E20EC7 /* CardView.swift in Sources */,
+				612DFA132C0574620085E8AB /* ImagePicker.swift in Sources */,
 				61B94C722C0382C300E20EC7 /* SwipeActionButtonsView.swift in Sources */,
 				376733632BFD0A840041CC11 /* SceneDelegate.swift in Sources */,
 				37A110402BBEEBD4002A4DE4 /* User+CoreDataClass.swift in Sources */,
@@ -950,10 +954,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Znakomsya/Preview Content\"";
-				DEVELOPMENT_TEAM = LU92772628;
+				DEVELOPMENT_TEAM = B3G8T9YAV4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Znakomsya/Info.plist;
@@ -970,6 +975,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "AI-Integration.Znakomsya";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -982,10 +988,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Znakomsya/Preview Content\"";
-				DEVELOPMENT_TEAM = LU92772628;
+				DEVELOPMENT_TEAM = B3G8T9YAV4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Znakomsya/Info.plist;
@@ -1002,6 +1009,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "AI-Integration.Znakomsya";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
