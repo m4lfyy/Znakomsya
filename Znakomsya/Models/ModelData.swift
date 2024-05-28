@@ -86,6 +86,7 @@ class ModelData: ObservableObject {
             NetworkService.shared.getStateToken { result in
                 switch result {
                 case .success(let stateToken):
+                    print(stateToken)
                     NetworkService.shared.sendAuthorizationCodeToServer(authorizationCode, state: stateToken) { result in
                         switch result {
                         case .success(let accessToken):
