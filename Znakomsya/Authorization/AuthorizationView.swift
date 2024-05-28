@@ -152,7 +152,15 @@ struct AuthorizationView: View {
                             VStack (alignment: .leading) {
                                 HStack (spacing: 25) {
                                     Button(action: {
-                                        modelData.signInWithGoogle()
+                                        modelData.signInWithGoogle { result in
+                                            switch result {
+                                            case .success:
+                                                navigateToMainTab = true
+                                            case .failure(let error):
+                                                print("Google Sign-In failed: \(error)")
+                                                // Обработка ошибки
+                                            }
+                                        }
                                     }) {
                                         Image("google_img")
                                             .resizable()

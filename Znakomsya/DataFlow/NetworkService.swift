@@ -3,8 +3,10 @@ import Foundation
 class NetworkService {
     static let shared = NetworkService()
     
+    let server_host = "http://localhost:8080"
+    
     func registerUser(with registrationData: RegistrationData, completion: @escaping (Result<Void, MyError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/register") else {
+        guard let url = URL(string: "\(server_host)/register") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -53,7 +55,7 @@ class NetworkService {
     }
     
     func loginUser(with loginData: LoginData, completion: @escaping (Result<LoginResponse, MyError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/login") else {
+        guard let url = URL(string: "\(server_host)/login") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -110,7 +112,7 @@ class NetworkService {
     }
     
     func getStateToken(completion: @escaping (Result<String, MyError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/google/state_token") else {
+        guard let url = URL(string: "\(server_host)/google/state_token") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -119,13 +121,24 @@ class NetworkService {
         request.httpMethod = "GET"
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
+            guard let data = data, error == nil else {
                 completion(.failure(.clientError))
                 return
             }
 
-            if let data = data, let stateToken = String(data: data, encoding: .utf8) {
-                completion(.success(stateToken))
+            if let httpResponse = response as? HTTPURLResponse {
+                switch httpResponse.statusCode {
+                case 200:
+                    do {
+                        let stateResponse = try JSONDecoder().decode(StateResponse.self, from: data)
+                        print(stateResponse.state_token)
+                        completion(.success(stateResponse.state_token))
+                    } catch {
+                        completion(.failure(.parsingError))
+                    }
+                default:
+                    completion(.failure(.unknownServerError))
+                }
             } else {
                 completion(.failure(.unknownServerError))
             }
@@ -134,17 +147,10 @@ class NetworkService {
     
     func sendAuthorizationCodeToServer(_ authorizationCode: String, state: String, completion: @escaping (Result<String, MyError>) -> Void) {
         // Создаем параметры в формате URL-encoded
-        let parameters: [String: String] = [
-            "code": authorizationCode,
-            "state": state
-        ]
         
-        let parameterArray = parameters.map { key, value in
-            return "\(key)=\(value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
-        }
-        let parameterString = parameterArray.joined(separator: "&")
+        print(authorizationCode)
         
-        guard let url = URL(string: "http://localhost:8080/google/callback?\(parameterString)") else {
+        guard let url = URL(string: "\(server_host)/google/callback/\(authorizationCode)/\(state)") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -183,9 +189,8 @@ class NetworkService {
         }.resume()
     }
 
-    
     func sendUpdatedProfile(updatedData: [String: Any], userEmail: String, completion: @escaping (Result<ServerResponse, MyError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/profile/email/\(userEmail)") else {
+        guard let url = URL(string: "\(server_host)/profile/email/\(userEmail)") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -225,7 +230,7 @@ class NetworkService {
     }
     
     func getProfile(userEmail: String, completion: @escaping (Result<ServerResponse, MyError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/profile/email/\(userEmail)") else {
+        guard let url = URL(string: "\(server_host)/profile/email/\(userEmail)") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -258,7 +263,7 @@ class NetworkService {
     }
 
     private func requestVerifyToken(for email: String, completion: @escaping (Result<Void, MyError>) -> Void) {
-        guard let url = URL(string: "http://localhost:8080/request_verify_token") else {
+        guard let url = URL(string: "\(server_host)/request_verify_token") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -279,7 +284,6 @@ class NetworkService {
                 completion(.failure(.clientError))
                 return
             }
-            
             if response is HTTPURLResponse {
                 completion(.success(()))
             } else {

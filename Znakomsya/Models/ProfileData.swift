@@ -79,3 +79,6 @@ struct ServerResponse: Decodable {
     let is_verified: Bool
 }
 
+struct StateResponse: Decodable {
+    let state_token: String
+}

@@ -59,27 +59,37 @@ class ModelData: ObservableObject {
     }
 
 
-    func signInWithGoogle() {
-        guard let clientID = GIDSignIn.sharedInstance.configuration?.clientID else { return }
+    func signInWithGoogle(completion: @escaping (Result<Void, MyError>) -> Void) {
+        guard let clientID = GIDSignIn.sharedInstance.configuration?.clientID else {
+            completion(.failure(.clientError))
+            return
+        }
+        
         let _ = GIDConfiguration(clientID: clientID, serverClientID: "331638865125-t9vf96bv08pr9viripqgeolikg8j2s1u.apps.googleusercontent.com")
-
+        
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootViewController = windowScene.windows.first?.rootViewController else {
             print("Unable to access root view controller")
+            completion(.failure(.clientError))
             return
         }
-
+        
         GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { signInResult, error in
             if let error = error {
                 print("Sign in failed: \(error)")
+                completion(.failure(.clientError))
                 return
             }
-
-            guard let signInResult = signInResult else { return }
+            
+            guard let signInResult = signInResult else {
+                completion(.failure(.clientError))
+                return
+            }
             print("Sign in succeeded: \(signInResult.user.profile?.name ?? "No name")")
-
+            
             guard let authorizationCode = signInResult.serverAuthCode else {
                 print("Failed to get authorization code")
+                completion(.failure(.clientError))
                 return
             }
             
@@ -91,13 +101,42 @@ class ModelData: ObservableObject {
                         case .success(let accessToken):
                             print("Access token received successfully")
                             TokenManager.shared.saveToken(accessToken)
-                            self.initializeEmptyUserData()
+                            
+                            let managedContext = CoreDataStack.shared.managedContext
+                            let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "User")
+                            
+                            do {
+                                let users = try managedContext.fetch(fetchRequest)
+                                print("1")
+                                NetworkService.shared.getProfile(userEmail: signInResult.user.profile?.email ?? "") { result in
+                                    switch result {
+                                    case .success(let userResponse):
+                                        print("2")
+                                        if users.isEmpty {
+                                            print("3")
+                                            self.registrationDataToCoreData(successfulResponse: userResponse)
+                                        }
+                                        self.updateProfileData(from: userResponse)
+                                        print(self.profileData)
+                                        print("4")
+                                        completion(.success(()))
+                                    case .failure(let error):
+                                        print("Get profile error: \(error)")
+                                        completion(.failure(error))
+                                    }
+                                }
+                            } catch {
+                                completion(.failure(.coreDataFetchError))
+                            }
+                            
                         case .failure(let error):
                             print("Failed to send authorization code: \(error)")
+                            completion(.failure(.unknownServerError))
                         }
                     }
                 case .failure(let error):
                     print("Failed to get state token: \(error)")
+                    completion(.failure(.unknownServerError))
                 }
             }
         }
