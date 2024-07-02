@@ -4,7 +4,7 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Инициализация Google Sign-In
+        // Инициализация Google Sign-In сессии
         GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: "331638865125-b8ojlm6thkasfdkecicn3bcm6aoletlf.apps.googleusercontent.com",
                                                                   serverClientID: "331638865125-t9vf96bv08pr9viripqgeolikg8j2s1u.apps.googleusercontent.com")
         return true

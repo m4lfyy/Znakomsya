@@ -1,0 +1,59 @@
+# Xcode
+.DS_Store
+*/build/
+*.xcuserstate
+*.xcworkspace
+*.xcscmblueprint
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods
+Pods/
+podspec.lock
+*.podspec
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Xcode specific
+xcuserdata/
+DerivedData/
+
+# Temporary files
+tmp/
+temp/
+
+# Logs
+*.log
+
+# AppCode
+.idea/
+
+# SwiftLint
+.swiftlint.yml
+
+# SwiftFormat
+.swiftformat
+
+# Generated files
+*.generated.swift
+
+# Realm database files
+*.realm
+*.realm.lock
+
+# Secrets
+.env
+
+# Other IDEs and editors
+.vscode/
+
