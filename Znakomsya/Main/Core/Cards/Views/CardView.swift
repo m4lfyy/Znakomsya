@@ -1,10 +1,3 @@
-//
-//  CardView.swift
-//  Znakomsya
-//
-//  Created by Данил Юсупов on 23.05.2024.
-//
-
 import SwiftUI
 
 struct CardView: View {

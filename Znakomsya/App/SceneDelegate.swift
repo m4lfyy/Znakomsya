@@ -9,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let contentView = ContentView().environmentObject(ModelData())
+            let contentView = AuthorizationView()
 
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window

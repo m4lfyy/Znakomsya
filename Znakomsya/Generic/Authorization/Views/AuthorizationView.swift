@@ -1,12 +1,14 @@
 import SwiftUI
-import GoogleSignIn
 
 struct AuthorizationView: View {
-    @EnvironmentObject var modelData: ModelData
-    @State private var showAlert = false
-    @State private var alertMessage = ""
-    @State private var isKeyboardVisible = false
-    @State private var navigateToMainTab = false
+    @StateObject private var viewModel: LoginViewModel
+    @EnvironmentObject private var modelData: ModelData
+
+    init() {
+        let mockAuthService = MockAuthService()
+        let tokenManager = TokenManager()
+        _viewModel = StateObject(wrappedValue: LoginViewModel(authService: mockAuthService, tokenManager: tokenManager))
+    }
     
     var body: some View {
         NavigationStack {
@@ -30,12 +32,12 @@ struct AuthorizationView: View {
                             .background(Color(red: 1, green: 0.90, blue: 0.90).opacity(0.35))
                             .cornerRadius(30)
                         
+                        // Username Field
                         VStack {
-                            // Стек для логина
                             VStack (alignment: .leading){
                                 HStack (spacing: 10) {
                                     Image("name_img")
-                                    TextField("Почта", text: $modelData.loginData.username)
+                                    TextField("Почта", text: $viewModel.loginData.username)
                                         .font(Font.custom("Montserrat-Meduim", size: 18))
                                         .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                         .frame(width: 230)
@@ -50,12 +52,12 @@ struct AuthorizationView: View {
                             .padding(.horizontal)
                             .padding(.bottom, 10)
                             
-                            // Стек для пароля
+                            // Password Field
                             VStack (alignment: .leading){
                                 HStack (spacing: 10) {
                                     Image("pass_img")
                                         .opacity(0.6)
-                                    SecureField("Пароль", text: $modelData.loginData.password)
+                                    SecureField("Пароль", text: $viewModel.loginData.password)
                                         .font(Font.custom("Montserrat-Meduim", size: 18))
                                         .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                         .frame(width: 230)
@@ -68,25 +70,10 @@ struct AuthorizationView: View {
                             .padding(.horizontal)
                             .padding(.bottom, 10)
                             
-                            // Стек для кнопки
+                            // Login Button
                             Button(action: {
-                                if let errorMessage = modelData.loginData.validationError() {
-                                        showAlert = true
-                                        alertMessage = errorMessage
-                                } else {
-                                    modelData.loginUser { result in
-                                        switch result {
-                                        case .success:
-                                            // Обработка успеха
-                                            navigateToMainTab = true
-                                        case .failure(let error):
-                                            // Обработка ошибки регистрации
-                                            showAlert = true
-                                            alertMessage = error.localizedDescription
-                                        }
-                                    }
-                                }
-                            }          
+                                viewModel.loginUser()
+                            }
                             ) {
                                 Text("Войти")
                                     .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
@@ -97,14 +84,14 @@ struct AuthorizationView: View {
                                     .background(Color(red: 1, green: 0.89, blue: 0.89).opacity(0.60))
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
-                            .alert(isPresented: $showAlert) {
-                                Alert(title: Text("Ошибка"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                            .alert(isPresented: $viewModel.showAlert) {
+                                Alert(title: Text("Ошибка"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
                             }
                             
-                            // Стек регистрации/сброса пароля
+                            // Registration and Password Reset
                             VStack (alignment: .leading) {
                                 HStack (spacing: 10) {
-                                    NavigationLink(destination: RegistrationView().environmentObject(ModelData())) {
+                                    NavigationLink(destination: RegistrationView().environmentObject(modelData)) {
                                             Text("Регистрация")
                                                 .foregroundColor(Color(red: 0.22, green: 0.23, blue: 0.25))
                                                 .font(.custom("Montserrat-Medium", size: 16))
@@ -113,7 +100,7 @@ struct AuthorizationView: View {
                                     }
                                     
                                     Button(action: {
-                                        
+                                        // Handle password reset
                                     }
                                     ) {
                                         Text("Забыли пароль?")
@@ -127,7 +114,7 @@ struct AuthorizationView: View {
                             .padding(.horizontal)
                             .padding(.bottom, 10)
                             
-                            // Альтернативный вход
+                            // Alternative Sign-In Options
                             VStack (alignment: .leading) {
                                 HStack(spacing: 10) {
                                     Rectangle()
@@ -148,19 +135,11 @@ struct AuthorizationView: View {
                             }
                             .padding(.bottom, 10)
                             
-                            // Другие сервисы
+                            // Social Sign-In Buttons
                             VStack (alignment: .leading) {
                                 HStack (spacing: 25) {
                                     Button(action: {
-                                        modelData.signInWithGoogle { result in
-                                            switch result {
-                                            case .success:
-                                                navigateToMainTab = true
-                                            case .failure(let error):
-                                                print("Google Sign-In failed: \(error)")
-                                                // Обработка ошибки
-                                            }
-                                        }
+                                        // Implement Google Sign-In
                                     }) {
                                         Image("google_img")
                                             .resizable()
@@ -197,15 +176,18 @@ struct AuthorizationView: View {
                 hideKeyboard()
             }))
             .ignoresSafeArea(.keyboard)
-            .navigationDestination(isPresented: $navigateToMainTab) {
+            .onAppear {
+                viewModel.checkExistingToken()
+            }
+            .navigationDestination(isPresented: $viewModel.navigateToMainTab) {
                 MainTabView()
                     .environmentObject(MatchManager())
-                    .environmentObject(modelData)
+                    .environmentObject(viewModel)
             }
         }
         .navigationBarBackButtonHidden(true)
     }
-    // Функция для скрытия клавиатуры
+    
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -215,4 +197,3 @@ struct AuthorizationView: View {
     AuthorizationView()
         .environmentObject(ModelData())
 }
-

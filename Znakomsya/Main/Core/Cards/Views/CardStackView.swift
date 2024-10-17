@@ -1,10 +1,3 @@
-//
-//  CardStackView.swift
-//  Znakomsya
-//
-//  Created by Данил Юсупов on 24.05.2024.
-//
-
 import SwiftUI
 
 struct CardStackView: View {
@@ -40,7 +33,7 @@ struct CardStackView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Image(.LOGHGG)
+                    Image("LOGHGG")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200)

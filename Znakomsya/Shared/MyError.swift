@@ -31,8 +31,3 @@ enum MyError: Error {
         }
     }
 }
-
-struct ErrorResponse: Decodable {
-    let detail: String
-}
-

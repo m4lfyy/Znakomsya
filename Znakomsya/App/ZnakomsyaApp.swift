@@ -8,9 +8,10 @@ struct ZnakomsyaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(modelData)
+            AuthorizationView()
                 .environmentObject(matchManager)
+                .environmentObject(modelData)
+                .preferredColorScheme(.light)
         }
     }
 }

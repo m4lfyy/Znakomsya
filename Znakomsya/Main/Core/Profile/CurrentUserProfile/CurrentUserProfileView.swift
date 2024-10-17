@@ -1,15 +1,9 @@
-//
-//  CurrentUserProfileView.swift
-//  Znakomsya
-//
-//  Created by Данил Юсупов on 26.05.2024.
-//
-
 import SwiftUI
 
 struct CurrentUserProfileView: View {
     @State private var showEditProfile = false
     @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var viewModel: LoginViewModel
     
     var body: some View {
         NavigationStack {
@@ -48,7 +42,7 @@ struct CurrentUserProfileView: View {
                 // logout/delete
                 Section {
                     Button ("Logout"){
-                        print("DEBUG: Logout here..")
+                        viewModel.logout()
                     }
                     .foregroundStyle(.red)
                 }

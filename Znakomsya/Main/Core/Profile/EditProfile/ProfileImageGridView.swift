@@ -1,10 +1,3 @@
-//
-//  ProfileImageGridView.swift
-//  Znakomsya
-//
-//  Created by Данил Юсупов on 27.05.2024.
-//
-
 import SwiftUI
 
 struct ProfileImageGridView: View {

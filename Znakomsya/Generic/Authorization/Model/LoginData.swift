@@ -14,14 +14,4 @@ struct LoginData: Encodable {
             return nil
         }
     }
-    
-    mutating func reset() {
-        username = ""
-        password = ""
-    }
-}
-
-struct LoginResponse: Decodable {
-    let access_token: String
-    let token_type: String
 }

@@ -1,10 +1,8 @@
 import Foundation
 import KeychainSwift
 
-class TokenManager {
-    static let shared = TokenManager()
+class TokenManager: TokenManagerProtocol {
     private let keychain = KeychainSwift()
-
     private let tokenKey = "accessToken"
 
     func saveToken(_ token: String) {

@@ -1,10 +1,3 @@
-//
-//  CardImageIndicatorView.swift
-//  Znakomsya
-//
-//  Created by Данил Юсупов on 24.05.2024.
-//
-
 import SwiftUI
 
 struct CardImageIndicatorView: View {

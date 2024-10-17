@@ -28,7 +28,7 @@ class ModelData: ObservableObject {
         NetworkService.shared.loginUser(with: loginData) { result in
             switch result {
             case .success(let tokenResponse):
-                TokenManager.shared.saveToken(tokenResponse.access_token)
+//                TokenManager.shared.saveToken(tokenResponse.access_token)
                 let managedContext = CoreDataStack.shared.managedContext
                 let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "User")
                 
@@ -57,7 +57,6 @@ class ModelData: ObservableObject {
             }
         }
     }
-
 
     func signInWithGoogle(completion: @escaping (Result<Void, MyError>) -> Void) {
         guard let clientID = GIDSignIn.sharedInstance.configuration?.clientID else {
@@ -100,7 +99,7 @@ class ModelData: ObservableObject {
                         switch result {
                         case .success(let accessToken):
                             print("Access token received successfully")
-                            TokenManager.shared.saveToken(accessToken)
+//                            TokenManager.shared.saveToken(accessToken)
                             
                             let managedContext = CoreDataStack.shared.managedContext
                             let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "User")
@@ -202,7 +201,6 @@ class ModelData: ObservableObject {
         }
         // You can add logic to update preferences_photo if needed.
     }
-    
     
     private func compareAndGenerateUpdateDictionary(currentProfileData: ProfileData) -> [String: Any] {
         let managedContext = CoreDataStack.shared.managedContext
