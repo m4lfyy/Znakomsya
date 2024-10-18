@@ -5,9 +5,14 @@ struct AuthorizationView: View {
     @EnvironmentObject private var modelData: ModelData
 
     init() {
+        _ = ServiceConfiguration()
         let mockAuthService = MockAuthService()
+        let mockTokenService = MockTokenService()
+        let mockGoogleService = GoogleService(tokenService: mockTokenService)
         let tokenManager = TokenManager()
-        _viewModel = StateObject(wrappedValue: LoginViewModel(authService: mockAuthService, tokenManager: tokenManager))
+        _viewModel = StateObject(wrappedValue: LoginViewModel(authService: mockAuthService,
+                                                              tokenManager: tokenManager,
+                                                              googleService: mockGoogleService))
     }
     
     var body: some View {
@@ -139,7 +144,7 @@ struct AuthorizationView: View {
                             VStack (alignment: .leading) {
                                 HStack (spacing: 25) {
                                     Button(action: {
-                                        // Implement Google Sign-In
+                                        viewModel.loginUserWithGoogle()
                                     }) {
                                         Image("google_img")
                                             .resizable()

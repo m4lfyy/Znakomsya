@@ -22,6 +22,12 @@
 		3763014C2CB5CDEA007B182B /* TokenManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763014B2CB5CDE9007B182B /* TokenManagerProtocol.swift */; };
 		376733602BFCF5E90041CC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767335F2BFCF5E90041CC11 /* AppDelegate.swift */; };
 		376733632BFD0A840041CC11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376733622BFD0A840041CC11 /* SceneDelegate.swift */; };
+		37718B532CC2B808003F4E71 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37718B522CC2B802003F4E71 /* TokenService.swift */; };
+		37718B552CC2B887003F4E71 /* MockTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37718B542CC2B878003F4E71 /* MockTokenService.swift */; };
+		37718B592CC2D2F0003F4E71 /* ServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37718B582CC2D2E7003F4E71 /* ServiceConfiguration.swift */; };
+		3779CD582CC1C5FF00734DFB /* TokenServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779CD572CC1C5FE00734DFB /* TokenServiceProtocol.swift */; };
+		3779CD5A2CC1C63200734DFB /* GoogleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779CD592CC1C62A00734DFB /* GoogleService.swift */; };
+		3779CD5C2CC1C6E200734DFB /* GoogleServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779CD5B2CC1C6DD00734DFB /* GoogleServiceProtocol.swift */; };
 		37A110372BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37A110352BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld */; };
 		37A110402BBEEBD4002A4DE4 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A1103E2BBEEBD4002A4DE4 /* User+CoreDataClass.swift */; };
 		37A110412BBEEBD4002A4DE4 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A1103F2BBEEBD4002A4DE4 /* User+CoreDataProperties.swift */; };
@@ -115,6 +121,12 @@
 		3763014B2CB5CDE9007B182B /* TokenManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManagerProtocol.swift; sourceTree = "<group>"; };
 		3767335F2BFCF5E90041CC11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		376733622BFD0A840041CC11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		37718B522CC2B802003F4E71 /* TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
+		37718B542CC2B878003F4E71 /* MockTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTokenService.swift; sourceTree = "<group>"; };
+		37718B582CC2D2E7003F4E71 /* ServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConfiguration.swift; sourceTree = "<group>"; };
+		3779CD572CC1C5FE00734DFB /* TokenServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenServiceProtocol.swift; sourceTree = "<group>"; };
+		3779CD592CC1C62A00734DFB /* GoogleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleService.swift; sourceTree = "<group>"; };
+		3779CD5B2CC1C6DD00734DFB /* GoogleServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleServiceProtocol.swift; sourceTree = "<group>"; };
 		37A110362BBEE615002A4DE4 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		37A1103E2BBEEBD4002A4DE4 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37A1103F2BBEEBD4002A4DE4 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -282,6 +294,7 @@
 		375FF9292CB8760800328B0B /* MockServices */ = {
 			isa = PBXGroup;
 			children = (
+				37718B542CC2B878003F4E71 /* MockTokenService.swift */,
 				375FF9272CB86A1000328B0B /* MockAuthService.swift */,
 			);
 			path = MockServices;
@@ -327,6 +340,9 @@
 		376301412CB5C95B007B182B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				37718B582CC2D2E7003F4E71 /* ServiceConfiguration.swift */,
+				37718B522CC2B802003F4E71 /* TokenService.swift */,
+				3779CD592CC1C62A00734DFB /* GoogleService.swift */,
 				376301492CB5CAE9007B182B /* AuthService.swift */,
 			);
 			path = Service;
@@ -335,6 +351,8 @@
 		376301422CB5C963007B182B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				3779CD5B2CC1C6DD00734DFB /* GoogleServiceProtocol.swift */,
+				3779CD572CC1C5FE00734DFB /* TokenServiceProtocol.swift */,
 				3763014B2CB5CDE9007B182B /* TokenManagerProtocol.swift */,
 				376301472CB5CAB4007B182B /* AuthServiceProtocol.swift */,
 			);
@@ -736,7 +754,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					37B2958C2B3F620100F876DE = {
 						CreatedOnToolsVersion = 15.1;
@@ -878,10 +896,12 @@
 				61B94C592BFFDF3300E20EC7 /* SizeConst.swift in Sources */,
 				61B94C7D2C03D28700E20EC7 /* CurrentUserProfileHeaderView.swift in Sources */,
 				61B94C6A2C0363BA00E20EC7 /* CardsViewModel.swift in Sources */,
+				37718B532CC2B808003F4E71 /* TokenService.swift in Sources */,
 				37A9BDC12B83FBE100660D04 /* ModelData.swift in Sources */,
 				61B94C862C04CE8900E20EC7 /* UserMatchView.swift in Sources */,
 				37090BB52BD583B600C2C506 /* LoginData.swift in Sources */,
 				370C1E3B2BF7D055001D69A0 /* MyError.swift in Sources */,
+				37718B552CC2B887003F4E71 /* MockTokenService.swift in Sources */,
 				61B94C4F2BFF9C9B00E20EC7 /* CardView.swift in Sources */,
 				612DFA132C0574620085E8AB /* ImagePicker.swift in Sources */,
 				61B94C722C0382C300E20EC7 /* SwipeActionButtonsView.swift in Sources */,
@@ -896,6 +916,7 @@
 				371BC1C72CA5829F0075EF23 /* AuthorizationView.swift in Sources */,
 				375FF9282CB86A1900328B0B /* MockAuthService.swift in Sources */,
 				37A6D2052BFFE00300B326C7 /* ProfileData.swift in Sources */,
+				3779CD5C2CC1C6E200734DFB /* GoogleServiceProtocol.swift in Sources */,
 				61B94C742C0383FE00E20EC7 /* SwipeAction.swift in Sources */,
 				371BC1C32CA5829B0075EF23 /* PhoneNumberFormatter.swift in Sources */,
 				371BC1C42CA5829B0075EF23 /* RegistrationView.swift in Sources */,
@@ -903,14 +924,17 @@
 				61B94C892C04D72500E20EC7 /* MatchManager.swift in Sources */,
 				37A110372BBEE615002A4DE4 /* CoreDataModel.xcdatamodeld in Sources */,
 				61B94C702C0364FA00E20EC7 /* MockData.swift in Sources */,
+				37718B592CC2D2F0003F4E71 /* ServiceConfiguration.swift in Sources */,
 				3763014C2CB5CDEA007B182B /* TokenManagerProtocol.swift in Sources */,
 				37A110412BBEEBD4002A4DE4 /* User+CoreDataProperties.swift in Sources */,
 				370C1E392BF7D016001D69A0 /* NetworkService.swift in Sources */,
 				61B94C6D2C03642500E20EC7 /* CardService.swift in Sources */,
+				3779CD582CC1C5FF00734DFB /* TokenServiceProtocol.swift in Sources */,
 				61B94C5B2BFFE26D00E20EC7 /* ImageScrollingOverlay.swift in Sources */,
 				61B94C672C03624D00E20EC7 /* CardModel.swift in Sources */,
 				61B94C552BFFCC7600E20EC7 /* SwipeActionIndicatorView.swift in Sources */,
 				61B94C532BFFA13B00E20EC7 /* UserInfoView.swift in Sources */,
+				3779CD5A2CC1C63200734DFB /* GoogleService.swift in Sources */,
 				376301482CB5CAB6007B182B /* AuthServiceProtocol.swift in Sources */,
 				61B94C7B2C03CDDC00E20EC7 /* CurrentUserProfileView.swift in Sources */,
 			);
@@ -1139,7 +1163,6 @@
 		37B295B52B3F620200F876DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1159,7 +1182,6 @@
 		37B295B62B3F620200F876DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1179,7 +1201,6 @@
 		37B295B82B3F620200F876DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LU92772628;
@@ -1197,7 +1218,6 @@
 		37B295B92B3F620200F876DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LU92772628;

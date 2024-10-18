@@ -11,9 +11,18 @@ struct CardStackView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 16) {
+                    Image("baritem")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 140)
+                        .padding(.top, -50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+
                     ZStack {
-                        ForEach(viewModel.cardModels) {card in
+                        ForEach(viewModel.cardModels) { card in
                             CardView(viewModel: viewModel, model: card)
+                                .padding(.top, -50)
                         }
                     }
                     
@@ -30,15 +39,6 @@ struct CardStackView: View {
             .animation(.easeInOut, value: showMatchView)
             .onReceive(matchManager.$matchedUser) { user in
                 showMatchView = user != nil
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Image("LOGHGG")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200)
-                        .padding(.top, 10)
-                }
             }
         }
     }

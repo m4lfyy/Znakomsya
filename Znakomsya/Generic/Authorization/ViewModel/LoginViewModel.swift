@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 
 class LoginViewModel: ObservableObject {
     @Published var loginData = LoginData()
@@ -7,13 +8,16 @@ class LoginViewModel: ObservableObject {
     @Published var navigateToMainTab = false
 
     private let authService: AuthServiceProtocol
-    private let tokenManager: TokenManagerProtocol
+        private let googleService: GoogleServiceProtocol
+        private let tokenManager: TokenManagerProtocol
 
-    init(authService: AuthServiceProtocol = AuthService(),
-         tokenManager: TokenManagerProtocol = TokenManager()) {
-        self.authService = authService
-        self.tokenManager = tokenManager
-    }
+        init(authService: AuthServiceProtocol = AuthService(config: ServiceConfiguration()),
+             tokenManager: TokenManagerProtocol = TokenManager(),
+             googleService: GoogleServiceProtocol = GoogleService(tokenService: TokenService(config: ServiceConfiguration()))) {
+            self.authService = authService
+            self.tokenManager = tokenManager
+            self.googleService = googleService
+        }
 
     func loginUser() {
         if let errorMessage = loginData.validationError() {
@@ -27,6 +31,21 @@ class LoginViewModel: ObservableObject {
                 switch result {
                 case .success(let loginResponse):
                     self?.tokenManager.saveToken(loginResponse.access_token)
+                    self?.navigateToMainTab = true
+                case .failure(let error):
+                    self?.alertMessage = error.localizedDescription
+                    self?.showAlert = true
+                }
+            }
+        }
+    }
+    
+    func loginUserWithGoogle() {
+        googleService.loginUserWithGoogle { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let accessToken):
+                    self?.tokenManager.saveToken(accessToken)
                     self?.navigateToMainTab = true
                 case .failure(let error):
                     self?.alertMessage = error.localizedDescription

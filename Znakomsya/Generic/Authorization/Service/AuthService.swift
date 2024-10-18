@@ -1,16 +1,14 @@
 import Foundation
 
 class AuthService: AuthServiceProtocol {
-    private let serverHost: String
-    private let urlSession: URLSession
+    private let config: ServiceConfiguration
 
-    init(serverHost: String = "http://localhost:8080", urlSession: URLSession = .shared) {
-        self.serverHost = serverHost
-        self.urlSession = urlSession
+    init(config: ServiceConfiguration) {
+        self.config = config
     }
 
     func loginUser(with loginData: LoginData, completion: @escaping (Result<LoginResponse, MyError>) -> Void) {
-        guard let url = URL(string: "\(serverHost)/login") else {
+        guard let url = URL(string: "\(config.serverHost)/login") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -34,7 +32,7 @@ class AuthService: AuthServiceProtocol {
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = parameterString.data(using: .utf8)
 
-        urlSession.dataTask(with: request) { data, response, error in
+        config.urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 completion(.failure(.clientError))
                 return

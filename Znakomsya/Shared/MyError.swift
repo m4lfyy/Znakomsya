@@ -21,7 +21,7 @@ enum MyError: Error {
         case .clientError:
             return "Ошибка на стороне клиента."
         case .serverError(let message):
-            return "Ошибка: \(message)"
+            return "\(message)"
         case .unknownServerError:
             return "Неизвестная ошибка на стороне сервера."
         case .coreDataSaveError:
