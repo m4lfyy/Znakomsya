@@ -9,12 +9,10 @@ class GoogleService: GoogleServiceProtocol {
     }
 
     func loginUserWithGoogle(completion: @escaping (Result<String, MyError>) -> Void) {
-        guard let clientID = GIDSignIn.sharedInstance.configuration?.clientID else {
+        guard (GIDSignIn.sharedInstance.configuration?.clientID) != nil else {
             completion(.failure(.clientError))
             return
         }
-
-        let _ = GIDConfiguration(clientID: clientID, serverClientID: "SERVER_CLIENT_ID")
 
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootViewController = windowScene.windows.first?.rootViewController else {

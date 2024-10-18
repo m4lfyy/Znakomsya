@@ -13,6 +13,8 @@
 		371BC1C32CA5829B0075EF23 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371BC1C02CA5829B0075EF23 /* PhoneNumberFormatter.swift */; };
 		371BC1C42CA5829B0075EF23 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371BC1C12CA5829B0075EF23 /* RegistrationView.swift */; };
 		371BC1C72CA5829F0075EF23 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371BC1C52CA5829F0075EF23 /* AuthorizationView.swift */; };
+		37243FFF2CC3107A0009D7CB /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 37243FFE2CC3107A0009D7CB /* GoogleSignIn */; };
+		372440012CC3107A0009D7CB /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 372440002CC3107A0009D7CB /* GoogleSignInSwift */; };
 		375FF9282CB86A1900328B0B /* MockAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375FF9272CB86A1000328B0B /* MockAuthService.swift */; };
 		3763013D2CB5C726007B182B /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763013C2CB5C718007B182B /* LoginResponse.swift */; };
 		376301442CB5C9A2007B182B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376301432CB5C99D007B182B /* LoginViewModel.swift */; };
@@ -44,7 +46,6 @@
 		37B30CC12BB60CC1000C0F75 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B30CC02BB60CC1000C0F75 /* TokenManager.swift */; };
 		37D0CF442BFBE63D00E8AF28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37D0CF432BFBE63D00E8AF28 /* GoogleService-Info.plist */; };
 		37FC606D2BB82EC90042E595 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC606C2BB82EC90042E595 /* CoreDataStack.swift */; };
-		46D95AAD6AC9AF3F71A0B5F5 /* Pods_Znakomsya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BFA4536F76E03B916D5B2D /* Pods_Znakomsya.framework */; };
 		6100B9572BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9452BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf */; };
 		6100B9582BAB294E00FBCE5D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9462BAB294E00FBCE5D /* Montserrat-Bold.ttf */; };
 		6100B9592BAB294E00FBCE5D /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6100B9472BAB294E00FBCE5D /* Montserrat-Italic.ttf */; };
@@ -145,7 +146,6 @@
 		37B30CC02BB60CC1000C0F75 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		37D0CF432BFBE63D00E8AF28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		37FC606C2BB82EC90042E595 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		4889AB197E659317A2CC8730 /* Pods-Znakomsya.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Znakomsya.release.xcconfig"; path = "Target Support Files/Pods-Znakomsya/Pods-Znakomsya.release.xcconfig"; sourceTree = "<group>"; };
 		6100B9452BAB294E00FBCE5D /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		6100B9462BAB294E00FBCE5D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		6100B9472BAB294E00FBCE5D /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
@@ -188,8 +188,6 @@
 		61B94C812C04C63500E20EC7 /* ProfileImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageGridView.swift; sourceTree = "<group>"; };
 		61B94C852C04CE8900E20EC7 /* UserMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMatchView.swift; sourceTree = "<group>"; };
 		61B94C882C04D72500E20EC7 /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
-		A0BFA4536F76E03B916D5B2D /* Pods_Znakomsya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Znakomsya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEC096C307C6C356B09652D8 /* Pods-Znakomsya.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Znakomsya.debug.xcconfig"; path = "Target Support Files/Pods-Znakomsya/Pods-Znakomsya.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +195,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				372440012CC3107A0009D7CB /* GoogleSignInSwift in Frameworks */,
 				37B30CBF2BB60C9F000C0F75 /* KeychainSwift in Frameworks */,
-				46D95AAD6AC9AF3F71A0B5F5 /* Pods_Znakomsya.framework in Frameworks */,
+				37243FFF2CC3107A0009D7CB /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,15 +218,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A492BA524F52D9AF2C96238 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CEC096C307C6C356B09652D8 /* Pods-Znakomsya.debug.xcconfig */,
-				4889AB197E659317A2CC8730 /* Pods-Znakomsya.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		371BC1BF2CA582930075EF23 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,9 +293,10 @@
 		375FF92A2CB87C5000328B0B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6100B9692BAB29AC00FBCE5D /* Fonts */,
+				6100B96A2BAB29CA00FBCE5D /* Info.plist */,
 				37D0CF432BFBE63D00E8AF28 /* GoogleService-Info.plist */,
 				37B295942B3F620200F876DE /* Assets.xcassets */,
+				6100B9692BAB29AC00FBCE5D /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -394,8 +385,6 @@
 				37B295A02B3F620200F876DE /* ZnakomsyaTests */,
 				37B295AA2B3F620200F876DE /* ZnakomsyaUITests */,
 				37B2958E2B3F620100F876DE /* Products */,
-				2A492BA524F52D9AF2C96238 /* Pods */,
-				D9E5188B652925EE6D3F79B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -412,7 +401,6 @@
 		37B2958F2B3F620100F876DE /* Znakomsya */ = {
 			isa = PBXGroup;
 			children = (
-				6100B96A2BAB29CA00FBCE5D /* Info.plist */,
 				37A6D2032BFFCC9A00B326C7 /* App */,
 				371BC1BF2CA582930075EF23 /* Generic */,
 				61B94C452BFF9A3400E20EC7 /* Main */,
@@ -677,14 +665,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		D9E5188B652925EE6D3F79B7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A0BFA4536F76E03B916D5B2D /* Pods_Znakomsya.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -692,11 +672,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37B295B12B3F620200F876DE /* Build configuration list for PBXNativeTarget "Znakomsya" */;
 			buildPhases = (
-				98ED7C8E64BA7FAE901CD9B1 /* [CP] Check Pods Manifest.lock */,
 				37B295892B3F620100F876DE /* Sources */,
 				37B2958A2B3F620100F876DE /* Frameworks */,
 				37B2958B2B3F620100F876DE /* Resources */,
-				9E29824DF8DB8108E8D852A8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -705,6 +683,8 @@
 			name = Znakomsya;
 			packageProductDependencies = (
 				37B30CBE2BB60C9F000C0F75 /* KeychainSwift */,
+				37243FFE2CC3107A0009D7CB /* GoogleSignIn */,
+				372440002CC3107A0009D7CB /* GoogleSignInSwift */,
 			);
 			productName = Znakomsya;
 			productReference = 37B2958D2B3F620100F876DE /* Znakomsya.app */;
@@ -780,6 +760,7 @@
 			mainGroup = 37B295842B3F620100F876DE;
 			packageReferences = (
 				37B30CBD2BB60C9F000C0F75 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				37243FFD2CC3107A0009D7CB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 37B2958E2B3F620100F876DE /* Products */;
 			projectDirPath = "";
@@ -836,48 +817,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		98ED7C8E64BA7FAE901CD9B1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Znakomsya-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9E29824DF8DB8108E8D852A8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Znakomsya/Pods-Znakomsya-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Znakomsya/Pods-Znakomsya-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Znakomsya/Pods-Znakomsya-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		37B295892B3F620100F876DE /* Sources */ = {
@@ -1094,7 +1033,6 @@
 		};
 		37B295B22B3F620200F876DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEC096C307C6C356B09652D8 /* Pods-Znakomsya.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1105,7 +1043,7 @@
 				DEVELOPMENT_TEAM = LU92772628;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Znakomsya/Info.plist;
+				INFOPLIST_FILE = Znakomsya/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1128,7 +1066,6 @@
 		};
 		37B295B32B3F620200F876DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4889AB197E659317A2CC8730 /* Pods-Znakomsya.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1139,7 +1076,7 @@
 				DEVELOPMENT_TEAM = LU92772628;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Znakomsya/Info.plist;
+				INFOPLIST_FILE = Znakomsya/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1274,6 +1211,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		37243FFD2CC3107A0009D7CB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		37B30CBD2BB60C9F000C0F75 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -1285,6 +1230,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		37243FFE2CC3107A0009D7CB /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37243FFD2CC3107A0009D7CB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		372440002CC3107A0009D7CB /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37243FFD2CC3107A0009D7CB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		37B30CBE2BB60C9F000C0F75 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 37B30CBD2BB60C9F000C0F75 /* XCRemoteSwiftPackageReference "keychain-swift" */;
